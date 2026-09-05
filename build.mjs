@@ -8,7 +8,8 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, cpSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { renderHome, renderCatalog, renderDocs, renderProduct, renderNotFound, price, tpl } from './src/templates.mjs';
+import { renderHome, renderCatalog, renderProduct, renderNotFound, price, tpl } from './src/templates.mjs';
+import { buildDocs } from './src/docs.mjs';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const read = (p) => JSON.parse(readFileSync(join(root, p), 'utf8'));
@@ -74,6 +75,7 @@ for (const s of scripts) counts.category[s.category] = (counts.category[s.catego
 /* ---------- contexto por idioma ---------- */
 
 const summary = [];
+const sitemapUrls = [];
 
 for (const t of langs) {
   const lang = t.code;
@@ -84,6 +86,11 @@ for (const t of langs) {
     home: base,
     catalog: `${base}scripts/`,
     docs: `${base}docs/`,
+    doc: (path = '', hash = '') => {
+      if (!path) return hash ? `${base}docs/#${hash}` : `${base}docs/`;
+      const href = `${base}docs/${String(path).replace(/^\/+|\/+$/g, '')}/`;
+      return hash ? `${href}#${hash}` : href;
+    },
     product: (slug) => `${base}scripts/${slug}/`,
     homeDefault: `/${site.defaultLang}/`,
     self: base,
@@ -127,12 +134,17 @@ for (const t of langs) {
     canonical: ctx.absolute(url.catalog),
   }))));
 
-  // documentación (toda en el sitio: no hay wiki externa)
-  summary.push(write(`${lang}/docs/index.html`, renderDocs(page({
+  // documentación: una página por tema, agrupada por script
+  const docs = buildDocs(page({
     url: { ...url, self: url.docs },
     altUrl: `/${other}/docs/`,
     canonical: ctx.absolute(url.docs),
-  }))));
+  }));
+  for (const doc of docs.files) {
+    summary.push(write(`${lang}/docs/${doc.file}`, doc.html));
+    sitemapUrls.push(doc.href);
+  }
+  summary.push(write(`assets/docs-search-${lang}.json`, `${JSON.stringify(docs.index, null, 2)}\n`));
 
   // fichas de producto
   for (const s of scripts) {
@@ -218,6 +230,7 @@ const tokens = `:root {
 summary.push(write('assets/site.css', tokens + readFileSync(join(root, 'src/styles.css'), 'utf8')));
 summary.push(write('assets/catalog.js', readFileSync(join(root, 'src/catalog.js'), 'utf8')));
 summary.push(write('assets/product.js', readFileSync(join(root, 'src/product.js'), 'utf8')));
+summary.push(write('assets/docs.js', readFileSync(join(root, 'src/docs.js'), 'utf8')));
 
 const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <rect width="32" height="32" rx="7" fill="${theme.accent}"/>
@@ -231,6 +244,7 @@ const urls = [];
 for (const lang of site.languages) {
   urls.push(`/${lang}/`, `/${lang}/scripts/`, `/${lang}/docs/`, ...scripts.map((s) => `/${lang}/scripts/${s.slug}/`));
 }
+urls.push(...sitemapUrls.filter((u) => !urls.includes(u)));
 summary.push(write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url><loc>${site.baseUrl.replace(/\/$/, '')}${u}</loc></url>`).join('\n')}

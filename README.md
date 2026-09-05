@@ -17,7 +17,7 @@ node serve.mjs     # lo sirve en http://localhost:4321
 | Los scripts: precio, versión, frameworks, textos, rendimiento | `content/scripts.json` |
 | Todo el texto de la web en español | `content/es.json` |
 | Todo el texto de la web en inglés | `content/en.json` |
-| La documentación (se genera en `/es/docs/` y `/en/docs/`) | `content/es.json` → `docs`, `content/en.json` → `docs` |
+| La documentación (índice en `/es/docs/` y `/en/docs/`, un apartado por script) | `content/es.json` → `docs`, `content/en.json` → `docs` |
 | El manual largo de un script | `content/manuals/<slug>.json` |
 | Aspecto visual | `src/styles.css` |
 | Estructura de las páginas | `src/templates.mjs` |
@@ -47,11 +47,26 @@ Los nombres de scripts, los precios y los milisegundos son valores de ejemplo.
 
 ## La documentación
 
-`/es/docs/` y `/en/docs/` se montan solas con lo que ya hay en
-`content/scripts.json`: pasos de instalación, exports, requisitos e historial
-de versiones de cada script. Encima van la explicación de cómo se mide el
-rendimiento y debajo la licencia, los términos, la privacidad, los reembolsos y
-el soporte, todo en `docs.legal` y `docs.support` de cada idioma.
+La documentación se genera como un sitio aparte, al estilo Docusaurus: barra
+lateral, una página por tema y un apartado por script.
+
+| Ruta | Qué es |
+| --- | --- |
+| `/{lang}/docs/` | Índice: lista de scripts y cómo está organizada |
+| `/{lang}/docs/performance/` | Cómo se mide el rendimiento |
+| `/{lang}/docs/<slug>/` | Introducción de ese script |
+| `/{lang}/docs/<slug>/<id>/` | Cada sección del manual |
+| `/{lang}/docs/<slug>/changelog/` | Historial de ese script |
+| `/{lang}/docs/changelog/` | Historial de todos |
+| `/{lang}/docs/legal/` | Licencia, términos, privacidad y reembolsos |
+| `/{lang}/docs/support/` | Soporte |
+
+Si un script no tiene `content/manuals/<slug>.json`, el build crea páginas de
+instalación, API y requisitos a partir de `content/scripts.json`. Encima van
+rendimiento, licencia y soporte, en `docs.legal` y `docs.support` de cada idioma.
+
+Los anclajes antiguos (`/docs/#jex-interactions`, `/docs/#changelog`,
+`#<slug>-<id>`) redirigen solos a la página nueva.
 
 El historial de cada script sale de su lista `changelog` en
 `content/scripts.json` (`version`, `date` y el texto en `es` y `en`). Si no la
@@ -62,13 +77,15 @@ pones, se muestra su versión actual.
 Si un script necesita más que los pasos de instalación —configuración, API
 completa, integraciones, solución de problemas— ponlo en
 `content/manuals/<slug>.json`. El build lo detecta solo por el nombre del
-archivo y lo pinta dentro del bloque de ese script en `/es/docs/` y `/en/docs/`,
-con su propio índice de secciones. La ficha del script enlaza al manual desde la
-pestaña de exports. Sin ese archivo, todo sigue igual que antes.
+archivo y convierte cada sección en una página bajo
+`/{lang}/docs/<slug>/<id>/`. La ficha del script enlaza al manual desde la
+pestaña de exports. Sin ese archivo, se generan las páginas cortas de
+instalación, API y requisitos.
 
 El archivo tiene un bloque por idioma y las mismas secciones en los dos, con el
-mismo `id` y en el mismo orden (el build para si no coinciden). Cada sección se
-ancla en `#<slug>-<id>`, así que los enlaces no se rompen al traducir:
+mismo `id` y en el mismo orden (el build para si no coinciden). Cada sección
+vive en `/{lang}/docs/<slug>/<id>/`; los anclajes viejos `#<slug>-<id>` siguen
+funcionando porque redirigen:
 
 ```json
 {

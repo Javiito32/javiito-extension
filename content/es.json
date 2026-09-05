@@ -5,8 +5,8 @@
   "dir": "ltr",
   "meta": {
     "home": {
-      "title": "{brand} · Scripts para FiveM medidos y sin ofuscar",
-      "description": "Scripts de FiveM para ESX, QBCore y Qbox con su resmon publicado, código sin ofuscar y actualizaciones incluidas. Venta a través de Tebex."
+      "title": "{brand} · Scripts para FiveM medidos y protegidos con Cfx.re",
+      "description": "Scripts de FiveM para ESX, QBCore y Qbox con su resmon publicado. Cada uno tiene su precio y se vende con Asset Escrow de Cfx.re a través de Tebex."
     },
     "catalog": {
       "title": "Catálogo de scripts · {brand}",
@@ -14,7 +14,7 @@
     },
     "docs": {
       "title": "Documentación · {brand}",
-      "description": "Instalación, exports, requisitos, historial de versiones y condiciones de los scripts de {brand}. Toda la documentación en la propia web."
+      "description": "Manuales por script: instalación, configuración, API, historial de versiones y condiciones de {brand}."
     },
     "product": {
       "title": "{name} · {brand}",
@@ -57,13 +57,12 @@
     "hero": {
       "eyebrow": "ESX · QBCore · Qbox · Standalone",
       "title": "Scripts para FiveM que no se comen tu servidor.",
-      "subtitle": "Cada recurso se publica con su medición de <span class=\"mono-inline\">resmon</span> real, código sin ofuscar y actualizaciones incluidas. Si en reposo pasa de 0,05 ms, no sale a la venta.",
+      "subtitle": "Cada recurso se publica con su medición de <span class=\"mono-inline\">resmon</span> real y se vende con Asset Escrow de Cfx.re, el sistema de protección de FiveM. Si en reposo pasa de 0,05 ms, no sale a la venta.",
       "ctaPrimary": "Ver catálogo",
       "ctaSecondary": "Cómo medimos el rendimiento",
       "badges": [
-        "Sin escrow",
-        "Sin ofuscar",
-        "Actualizaciones de por vida",
+        "Asset Escrow de Cfx.re",
+        "Precio por script",
         "Soporte en Discord",
         "Pago seguro con Tebex"
       ]
@@ -91,16 +90,16 @@
           "text": "Publicamos el resmon real de cada script, en reposo y bajo carga con 64 jugadores. Sin capturas retocadas."
         },
         {
-          "title": "Código abierto",
-          "text": "Sin escrow ni ofuscación. Puedes leerlo, auditarlo y adaptarlo al flujo de tu servidor sin pedir permiso."
+          "title": "Asset Escrow de Cfx.re",
+          "text": "Se venden con el sistema de protección oficial de FiveM. El config.lua queda editable para adaptar el recurso a tu servidor."
         },
         {
           "title": "Instalación en minutos",
           "text": "Una carpeta, un ensure y el SQL. Documentación con cada export, cada evento y cada valor del config."
         },
         {
-          "title": "Actualizaciones incluidas",
-          "text": "Compras una vez. Parches, compatibilidad con nuevas builds y funciones nuevas sin coste adicional."
+          "title": "Soporte en Discord",
+          "text": "Preventa, instalación y errores se resuelven en el Discord. También antes de que compres."
         }
       ]
     },
@@ -123,23 +122,20 @@
       }
     },
     "licenses": {
-      "eyebrow": "// Licencias",
-      "title": "Pagas una vez por servidor.",
-      "note": "Sin suscripción mensual y sin límite de jugadores. La licencia se ata a la IP del servidor y puedes moverla cuando quieras. El cobro y la entrega los gestiona Tebex.",
+      "eyebrow": "// Precios",
+      "title": "Cada script tiene su precio.",
+      "note": "No hay un pago único para todo el catálogo. Compras el recurso que necesitas, o encargas un desarrollo a medida. El cobro y la entrega los gestiona Tebex, con Asset Escrow de Cfx.re.",
       "plans": [
         {
-          "label": "Un servidor",
-          "price": "{minPrice}",
-          "priceNote": {
-            "one": "pago único",
-            "other": "desde / script"
-          },
-          "text": "Para el servidor que compra los scripts que necesita, uno a uno.",
+          "label": "Scripts",
+          "price": "Por script",
+          "priceNote": "el precio está en su ficha",
+          "text": "Cada recurso se vende por separado. Eliges el que necesitas y pagas lo que marca su ficha.",
           "features": [
-            "1 servidor de producción",
-            "Código completo, sin escrow",
-            "Actualizaciones de por vida",
-            "Soporte en el Discord público"
+            "Licencia para 1 servidor",
+            "Asset Escrow de Cfx.re",
+            "config.lua editable",
+            "Soporte en el Discord"
           ],
           "cta": "Ver catálogo",
           "ctaType": "catalog"
@@ -147,33 +143,33 @@
         {
           "label": "Pack completo",
           "price": "{bundlePrice}",
-          "priceNote": "pago único",
-          "badge": "Más elegido",
+          "priceNote": "todo el catálogo",
+          "badge": "Pack",
           "highlight": true,
-          "text": "Todo el catálogo actual más lo que se publique este año, en un solo pago.",
+          "text": "Todos los scripts disponibles, en una sola compra.",
           "features": [
             {
               "one": "El script del catálogo",
               "other": "Los {availableCount} scripts disponibles"
             },
-            "Lanzamientos de [periodo] incluidos",
+            "Asset Escrow de Cfx.re",
             "Canal de soporte prioritario",
-            "Migración desde tu script actual"
+            "Un solo pago en Tebex"
           ],
           "cta": "Comprar el pack en Tebex",
           "ctaType": "bundle"
         },
         {
-          "label": "Red de servidores",
+          "label": "Servicios a medida",
           "price": "A medida",
-          "text": "Para redes con varios servidores o desarrollos hechos a petición.",
+          "text": "Encargos, adaptaciones a vuestro framework o redes con varios servidores.",
           "features": [
-            "Licencia para varias IP",
+            "Desarrollo a petición",
             "Adaptaciones a vuestro framework",
-            "Contacto directo por Discord",
-            "Factura con IVA"
+            "Licencia para varias IP",
+            "Presupuesto por Discord"
           ],
-          "cta": "Hablar contigo",
+          "cta": "Pedir presupuesto",
           "ctaType": "discord"
         }
       ]
@@ -185,7 +181,11 @@
       "items": [
         {
           "q": "¿Los scripts vienen con escrow?",
-          "a": "No. Recibes el recurso completo en Lua, comentado y sin cifrar. Puedes modificar el config, los textos y la lógica sin romper la licencia."
+          "a": "Sí. Se venden con Asset Escrow de Cfx.re, el sistema de protección oficial de FiveM. El <span class=\"mono-inline\">config.lua</span> queda editable para adaptar el recurso a tu servidor; el núcleo va protegido."
+        },
+        {
+          "q": "¿Hay un precio único para todos los scripts?",
+          "a": "No. Cada script tiene el suyo, publicado en su ficha. Si lo que necesitas no está en el catálogo, se presupuesta a medida por Discord."
         },
         {
           "q": "¿Funciona con Qbox o con un framework propio?",
@@ -197,7 +197,7 @@
         },
         {
           "q": "¿Hay reembolsos?",
-          "a": "Se tramitan a través de Tebex siguiendo [tu política de reembolsos]. Al ser producto digital con el código incluido, lo habitual es no admitir devolución salvo que el script no funcione y no se pueda arreglar."
+          "a": "Se tramitan a través de Tebex siguiendo [tu política de reembolsos]. Al ser producto digital, lo habitual es no admitir devolución salvo que el script no funcione y no se pueda arreglar."
         },
         {
           "q": "¿Lo instaláis vosotros?",
@@ -264,20 +264,43 @@
     }
   },
   "docs": {
-    "breadcrumb": "Inicio / Documentación",
+    "breadcrumb": "Documentación",
     "title": "Documentación",
-    "subtitle": "Instalación, exports, requisitos, versiones y condiciones. Está todo en esta página: no hay wiki aparte ni enlaces a otras webs.",
+    "subtitle": "Un manual por script: instalación, configuración, API y condiciones. Toda la documentación vive en esta web.",
     "tocTitle": "En esta página",
+    "sidebarStart": "Empezar",
+    "indexNav": "Índice",
+    "introLead": [
+      "Cada script tiene su propio manual. Elige el recurso en la barra de la izquierda o en la lista de abajo: instalación, configuración, API y solución de problemas van en páginas aparte, no en un único bloque.",
+      "No hay wiki externa. Lo que ves aquí es lo que se publica con cada versión."
+    ],
+    "introHowTitle": "Cómo está organizada",
+    "introHow": [
+      "Un apartado por script, con su versión y su historial.",
+      "Las mismas instrucciones de la ficha, más el manual largo si el script lo tiene.",
+      "Licencia, privacidad y soporte en páginas propias."
+    ],
+    "openManual": "Abrir el manual",
+    "searchLabel": "Buscar en la documentación",
+    "searchPlaceholder": "Buscar",
+    "searchNoResults": "No hay páginas que coincidan.",
+    "menuOpen": "Índice",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "copy": "Copiar",
+    "copied": "Copiado",
     "performance": {
       "title": "Cómo medimos el rendimiento",
       "text": "Cada script se mide con <span class=\"mono-inline\">resmon 1</span> en un servidor limpio: primero en reposo, con el recurso cargado y nada en pantalla, y después en el peor escenario que se espera en producción. Se publican los dos valores, nunca una media. Si en reposo pasa de 0,05 ms, no sale a la venta.",
       "note": "Mediciones hechas en {hardware} con FiveM build {build}. La tabla completa de cada script está en su ficha."
     },
     "scripts": {
-      "title": "Instalación y uso",
-      "text": "Cada script con sus pasos de instalación, su API y sus requisitos. Los mismos textos que verás en su ficha, juntos y en una sola página."
+      "title": "Scripts",
+      "text": "Elige un script para abrir su manual: instalación, configuración, API e historial."
     },
     "script": {
+      "overview": "Introducción",
+      "features": "Qué incluye",
       "install": "Instalación",
       "api": "Exports y eventos",
       "requirements": "Requisitos",
@@ -302,12 +325,12 @@
         {
           "id": "license",
           "title": "Licencia de uso",
-          "text": "Cada compra incluye una licencia para un servidor de producción. Recibes el código completo, sin escrow y sin ofuscar: puedes editar el config, los textos y la lógica para adaptarlo a tu servidor. No se permite revender, redistribuir ni publicar el código, ni entero ni por partes. Para redes con varias IP, se acuerda por Discord."
+          "text": "Cada compra incluye una licencia para un servidor de producción. Los scripts se entregan con Asset Escrow de Cfx.re: puedes editar el config.lua y los archivos que vengan abiertos; el resto queda protegido por el sistema de Cfx.re. No se permite revender, redistribuir ni publicar el recurso, ni entero ni por partes. Para redes con varias IP o encargos a medida, se acuerda por Discord."
         },
         {
           "id": "terms",
           "title": "Términos",
-          "text": "La venta, el cobro y la factura los gestiona Tebex desde la tienda, así que al comprar aceptas también sus condiciones. La entrega es automática en cuanto se confirma el pago y las actualizaciones salen del mismo enlace de tu compra, sin coste añadido."
+          "text": "La venta, el cobro y la factura los gestiona Tebex desde la tienda, así que al comprar aceptas también sus condiciones. La entrega es automática en cuanto se confirma el pago. Las versiones nuevas se descargan desde el mismo enlace de tu compra en Tebex."
         },
         {
           "id": "privacy",
@@ -317,7 +340,7 @@
         {
           "id": "refunds",
           "title": "Reembolsos",
-          "text": "Se tramitan a través de Tebex siguiendo [tu política de reembolsos]. Al ser producto digital con el código incluido, lo habitual es no admitir devolución salvo que el script no funcione y no se pueda arreglar; escribe por Discord antes de abrir la solicitud."
+          "text": "Se tramitan a través de Tebex siguiendo [tu política de reembolsos]. Al ser producto digital, lo habitual es no admitir devolución salvo que el script no funcione y no se pueda arreglar; escribe por Discord antes de abrir la solicitud."
         }
       ]
     },
@@ -383,8 +406,8 @@
       "checkoutNote": "Checkout y factura a cargo de Tebex",
       "includes": [
         "Entrega automática al confirmarse el pago",
-        "Código completo, sin escrow",
-        "Actualizaciones de por vida desde tu compra",
+        "Asset Escrow de Cfx.re",
+        "config.lua editable",
         "Soporte en el Discord"
       ],
       "specTitle": "Ficha técnica",
@@ -407,7 +430,7 @@
     "betaNotice": "Este script está en beta cerrada: todavía no se vende. Apúntate en el Discord para probarlo."
   },
   "footer": {
-    "tagline": "Scripts de FiveM medidos, documentados y sin ofuscar.",
+    "tagline": "Scripts de FiveM medidos, documentados y protegidos con Cfx.re.",
     "columns": [
       {
         "title": "Producto",
