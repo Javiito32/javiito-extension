@@ -1,0 +1,112 @@
+[
+  {
+    "slug": "jex-interactions",
+    "name": "jex_interactions",
+    "price": 19.95,
+    "category": "utility",
+    "frameworks": [
+      "Standalone"
+    ],
+    "status": "available",
+    "featured": true,
+    "version": "1.0.0",
+    "updated": "2026-09-05",
+    "dependencies": [],
+    "size": "0.6 MB",
+    "locales": [
+      "ES",
+      "EN"
+    ],
+    "tebex": "https://tu-tienda.tebex.io/package/000009",
+    "idle": "0.00 ms",
+    "performance": [
+      {
+        "scenario": "noPrompt",
+        "cpu": "0.00 ms",
+        "memory": "0.31 MB",
+        "good": true
+      },
+      {
+        "scenario": "onePrompt",
+        "cpu": "0.01 ms",
+        "memory": "0.34 MB",
+        "good": true
+      },
+      {
+        "scenario": "tenOrbits",
+        "cpu": "0.02 ms",
+        "memory": "0.40 MB",
+        "good": true
+      },
+      {
+        "scenario": "peak",
+        "cpu": "0.03 ms",
+        "memory": "0.42 MB",
+        "good": false
+      }
+    ],
+    "code": "-- Un aviso sencillo: \"Pulsa E para abrir el garaje\"\nexports['jex_interactions']:show({\n  id       = 'garage',\n  key      = 'E',\n  label    = 'Abrir garaje',\n  hint     = 'Selecciona uno de tus vehiculos',\n  priority = 10,\n})\n\n-- Actualiza solo lo que cambia, sin reiniciar la animacion\nexports['jex_interactions']:update('garage', {\n  state = 'bad',\n  label = 'Garaje no disponible',\n})\n\n-- Oculta uno concreto, o todos los de tu recurso\nexports['jex_interactions']:hide('garage')\nexports['jex_interactions']:hideAll()",
+    "apiNote": {
+      "exports": 6,
+      "events": 2
+    },
+    "es": {
+      "tagline": "Todos los avisos de «pulsa E» de tu servidor, con un mismo estilo y personalizables al detalle.",
+      "description": [
+        "Un solo recurso para todos los avisos de interacción de tu servidor, controlado desde un único sitio. Tecla, texto, texto secundario, color, forma y posición se ajustan al detalle desde <span class=\"mono-inline\">config.lua</span>: puedes dejarlo tal cual viene o afinarlo hasta que parezca hecho a medida, y el cambio se aplica a la vez en todos los scripts que lo usen.",
+        "Incluye <strong>Orbit Follow</strong>, el modo que saca el aviso de la esquina y lo coloca junto al personaje: sigue al jugador con un movimiento suave, cambia de lado cuando no tiene espacio y se mantiene siempre dentro de pantalla. Si prefieres algo clásico, tienes cinco posiciones fijas más.",
+        "Varios recursos pueden mostrar sus propios avisos a la vez: se ordenan por prioridad, cada recurso usa su propio espacio de identificadores y, si se detiene, sus avisos se eliminan solos. Es <strong>standalone</strong> —sin framework, sin ox_lib, sin dependencias— y en uso normal se mantiene en 0.00 ms."
+      ],
+      "features": [
+        "Orbit Follow: el aviso acompaña al personaje sin salirse de pantalla",
+        "Seis posiciones: cuatro esquinas, inferior central y Orbit Follow",
+        "Varios avisos a la vez, ordenados por prioridad",
+        "Estados ok, warn y bad para señalar si la acción está disponible",
+        "Avisos permanentes o con duración automática",
+        "Tecla, texto principal y texto secundario personalizables",
+        "Forma redonda o cuadrada, marco exterior opcional y colores a tu gusto",
+        "API de 6 exports y 2 eventos, con limpieza automática por recurso",
+        "Standalone, Lua 5.4 y listo para Asset Escrow con config.lua editable",
+        "NUI ya compilada: no hace falta Node.js ni compilar nada",
+        "0.00 ms en uso normal"
+      ],
+      "installSteps": [
+        "Copia la carpeta <span class=\"mono-inline\">{name}</span> dentro de tu carpeta de recursos.",
+        "Añade <span class=\"mono-inline\">ensure {name}</span> a tu <span class=\"mono-inline\">server.cfg</span>, por encima de los scripts que vayan a usar su API.",
+        "Abre <span class=\"mono-inline\">config.lua</span> y ajusta el estilo por defecto: posición, colores, forma, tecla, avisos visibles a la vez y duración máxima.",
+        "Desde tus scripts, llama a <span class=\"mono-inline\">exports[&#39;{name}&#39;]:show{}</span> con el id, la tecla y el texto de cada interacción.",
+        "Usa <span class=\"mono-inline\">update</span> para cambiar un aviso en caliente y <span class=\"mono-inline\">hide</span> o <span class=\"mono-inline\">hideAll</span> para retirarlo.",
+        "Comprueba el consumo con <span class=\"mono-inline\">resmon 1</span>: sin ningún aviso visible tiene que marcar 0.00 ms."
+      ]
+    },
+    "en": {
+      "tagline": "Every \"press E\" prompt on your server, in one style and customisable down to the detail.",
+      "description": [
+        "One resource for every interaction prompt on your server, controlled from a single place. Key, label, hint, colour, shape and placement are tuned in detail from <span class=\"mono-inline\">config.lua</span>: leave it as it ships or refine it until it looks made for your server, and the change applies across every script using it at once.",
+        "It includes <strong>Orbit Follow</strong>, the mode that takes the prompt out of the corner and places it beside the character: it follows the player smoothly, flips side when it runs out of room and always stays on screen. If you prefer something classic, there are five fixed placements as well.",
+        "Several resources can show their own prompts at the same time: they stack by priority, each resource gets its own id namespace and, if it stops, its prompts are removed automatically. It is <strong>standalone</strong> —no framework, no ox_lib, no dependencies— and in normal use it stays at 0.00 ms."
+      ],
+      "features": [
+        "Orbit Follow: the prompt follows the character without leaving the screen",
+        "Six placements: four corners, bottom centre and Orbit Follow",
+        "Multiple prompts at once, ordered by priority",
+        "ok, warn and bad states to show whether the action is available",
+        "Permanent prompts or ones that expire on their own",
+        "Custom key, main label and secondary hint",
+        "Round or square shape, optional outer frame and colours your way",
+        "6 exports and 2 events, with automatic per-resource cleanup",
+        "Standalone, Lua 5.4 and Asset Escrow ready with an editable config.lua",
+        "NUI ships compiled: no Node.js and nothing to build",
+        "0.00 ms in normal use"
+      ],
+      "installSteps": [
+        "Copy the <span class=\"mono-inline\">{name}</span> folder into your resources folder.",
+        "Add <span class=\"mono-inline\">ensure {name}</span> to your <span class=\"mono-inline\">server.cfg</span>, above every script that will use its API.",
+        "Open <span class=\"mono-inline\">config.lua</span> and set the defaults: placement, colours, shape, key, how many prompts show at once and the maximum duration.",
+        "From your own scripts, call <span class=\"mono-inline\">exports[&#39;{name}&#39;]:show{}</span> with the id, key and text for each interaction.",
+        "Use <span class=\"mono-inline\">update</span> to change a prompt live and <span class=\"mono-inline\">hide</span> or <span class=\"mono-inline\">hideAll</span> to take it down.",
+        "Check usage with <span class=\"mono-inline\">resmon 1</span>: with no prompt visible it must read 0.00 ms."
+      ]
+    }
+  }
+]

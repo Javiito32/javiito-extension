@@ -1,0 +1,97 @@
+{
+  "brand": {
+    "name": "Javiito",
+    "handwritten": "Extensions",
+    "initials": "jx",
+    "fullName": "Javiito Extensions"
+  },
+  "domain": "tudominio.com",
+  "baseUrl": "https://tudominio.com",
+  "defaultLang": "es",
+  "languages": [
+    "es",
+    "en"
+  ],
+  "links": {
+    "discord": "https://discord.gg/TU-INVITACION",
+    "tebexStore": "https://tu-tienda.tebex.io",
+    "tebexOrders": "https://checkout.tebex.io/payment-history",
+    "tebexBundle": "https://tu-tienda.tebex.io/package/000000",
+    "docs": "https://docs.tudominio.com",
+    "changelog": "https://docs.tudominio.com/changelog"
+  },
+  "bundle": {
+    "price": 149,
+    "tebex": "https://tu-tienda.tebex.io/package/000000"
+  },
+  "stats": {
+    "activeServers": "[N]",
+    "benchmarkHardware": "[hardware]",
+    "fivemBuild": "[build]"
+  },
+  "theme": {
+    "accent": "#B4F133",
+    "accentInk": "#0A0B0D",
+    "accentSoft": "rgba(180, 241, 51, 0.08)",
+    "bg": "#0A0B0D",
+    "surface": "#0C0E11",
+    "raised": "#0E1014",
+    "header": "#101317",
+    "border": "#212429",
+    "borderSoft": "#191C21",
+    "borderStrong": "#2B2F36",
+    "text": "#F2F4F6",
+    "textBody": "#E7E9EC",
+    "textMuted": "#9AA0A9",
+    "textFaint": "#6A7079",
+    "textDim": "#565C66",
+    "warn": "#E0705C"
+  },
+  "fonts": {
+    "sans": "'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+    "mono": "'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace",
+    "hand": "'Caveat', 'Segoe Script', 'Bradley Hand', cursive",
+    "googleUrl": "https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+  },
+  "compat": [
+    "ESX Legacy",
+    "QBCore",
+    "Qbox",
+    "ox_lib",
+    "ox_inventory",
+    "oxmysql",
+    "qb-target"
+  ],
+  "resmonDemo": [
+    {
+      "name": "jex_interactions",
+      "cpu": "0.00 ms",
+      "memory": "0.31 MB",
+      "tone": "accent"
+    },
+    {
+      "name": "ox_target",
+      "cpu": "0.01 ms",
+      "memory": "1.80 MB",
+      "tone": "muted"
+    },
+    {
+      "name": "ox_inventory",
+      "cpu": "0.03 ms",
+      "memory": "4.10 MB",
+      "tone": "muted"
+    },
+    {
+      "name": "es_extended",
+      "cpu": "0.06 ms",
+      "memory": "12.4 MB",
+      "tone": "muted"
+    },
+    {
+      "name": "interact_legacy",
+      "cpu": "0.31 ms",
+      "memory": "6.20 MB",
+      "tone": "warn"
+    }
+  ]
+}

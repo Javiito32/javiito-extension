@@ -1,0 +1,12 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1440, "h": 3400, "title": "Landing" },
+    { "file": "Catalogo.dc.html", "x": 1600, "y": 0, "w": 1440, "h": 1900, "title": "Catálogo" },
+    { "file": "Producto.dc.html", "x": 3200, "y": 0, "w": 1440, "h": 2280, "title": "Ficha de producto" }
+  ],
+  "annotations": [
+    { "id": "placeholders", "x": 0, "y": -190, "w": 460, "text": "Todo lo que va entre [corchetes] es un hueco que tienes que rellenar tú: dominio, Discord, fechas, número de servidores y la política de reembolsos.\n\nNombres de scripts, precios y milisegundos son valores de ejemplo para ver la maqueta funcionando." },
+    { "id": "sistema", "x": 1600, "y": -190, "w": 460, "text": "Sistema: Space Grotesk + JetBrains Mono para datos + Caveat para la firma \"Extensions\".\nFondo #0A0B0D, bordes #212429, texto #E7E9EC / #9AA0A9.\nUn solo acento (chip \"accent\" arriba de cada artboard) para cambiar el verde de golpe." }
+  ],
+  "launch": { "view": "canvas" }
+}

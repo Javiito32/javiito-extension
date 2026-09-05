@@ -1,0 +1,402 @@
+{
+  "code": "es",
+  "label": "Español",
+  "short": "ES",
+  "dir": "ltr",
+  "meta": {
+    "home": {
+      "title": "{brand} · Scripts para FiveM medidos y sin ofuscar",
+      "description": "Scripts de FiveM para ESX, QBCore y Qbox con su resmon publicado, código sin ofuscar y actualizaciones incluidas. Venta a través de Tebex."
+    },
+    "catalog": {
+      "title": "Catálogo de scripts · {brand}",
+      "description": "Los {scriptCount} scripts de {brand} con su consumo en reposo, sus frameworks compatibles y su precio."
+    },
+    "product": {
+      "title": "{name} · {brand}",
+      "description": "{tagline} Consumo en reposo: {idle}. Compatible con {frameworks}."
+    }
+  },
+  "nav": {
+    "catalog": "Catálogo",
+    "docs": "Documentación",
+    "changelog": "Changelog",
+    "support": "Soporte",
+    "discord": "Discord",
+    "orders": "Mis compras"
+  },
+  "common": {
+    "view": "Ver",
+    "buyOnTebex": "Comprar en Tebex",
+    "viewCatalog": "Ver catálogo",
+    "from": "desde",
+    "perScript": "/ script",
+    "waitlist": "Lista",
+    "skipToContent": "Ir al contenido",
+    "languageLabel": "Idioma"
+  },
+  "categories": {
+    "all": "Todas",
+    "utility": "Utilidades"
+  },
+  "statuses": {
+    "available": "Disponible",
+    "beta": "Beta cerrada"
+  },
+  "perfScenarios": {
+    "peak": "Pico de uso",
+    "noPrompt": "Sin ningún prompt visible",
+    "onePrompt": "Un prompt en pantalla",
+    "tenOrbits": "Diez prompts en Orbit Follow a la vez"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "ESX · QBCore · Qbox · Standalone",
+      "title": "Scripts para FiveM que no se comen tu servidor.",
+      "subtitle": "Cada recurso se publica con su medición de <span class=\"mono-inline\">resmon</span> real, código sin ofuscar y actualizaciones incluidas. Si en reposo pasa de 0,05 ms, no sale a la venta.",
+      "ctaPrimary": "Ver catálogo",
+      "ctaSecondary": "Cómo medimos el rendimiento",
+      "badges": [
+        "Sin escrow",
+        "Sin ofuscar",
+        "Actualizaciones de por vida",
+        "Soporte en Discord",
+        "Pago seguro con Tebex"
+      ]
+    },
+    "resmon": {
+      "title": "resmon · [tu-servidor]",
+      "players": "64 / 128",
+      "columns": {
+        "resource": "recurso",
+        "cpu": "cpu",
+        "memory": "memoria"
+      },
+      "note": "Captura de referencia · 64 jugadores conectados · [datos de ejemplo]"
+    },
+    "compat": {
+      "label": "Compatible con",
+      "servers": "{activeServers} servidores activos"
+    },
+    "features": {
+      "eyebrow": "// Cómo trabajamos",
+      "title": "Cuatro cosas que damos por sentadas y casi nadie cumple.",
+      "items": [
+        {
+          "title": "Rendimiento medido",
+          "text": "Publicamos el resmon real de cada script, en reposo y bajo carga con 64 jugadores. Sin capturas retocadas."
+        },
+        {
+          "title": "Código abierto",
+          "text": "Sin escrow ni ofuscación. Puedes leerlo, auditarlo y adaptarlo al flujo de tu servidor sin pedir permiso."
+        },
+        {
+          "title": "Instalación en minutos",
+          "text": "Una carpeta, un ensure y el SQL. Documentación con cada export, cada evento y cada valor del config."
+        },
+        {
+          "title": "Actualizaciones incluidas",
+          "text": "Compras una vez. Parches, compatibilidad con nuevas builds y funciones nuevas sin coste adicional."
+        }
+      ]
+    },
+    "catalogSection": {
+      "eyebrow": "// Catálogo",
+      "title": {
+        "one": "El primer script",
+        "other": "Scripts destacados"
+      },
+      "cta": {
+        "one": "Ver el catálogo",
+        "other": "Ver los {scriptCount} scripts"
+      },
+      "columns": {
+        "script": "script",
+        "description": "descripción",
+        "cpu": "cpu reposo",
+        "framework": "framework",
+        "price": "precio"
+      }
+    },
+    "licenses": {
+      "eyebrow": "// Licencias",
+      "title": "Pagas una vez por servidor.",
+      "note": "Sin suscripción mensual y sin límite de jugadores. La licencia se ata a la IP del servidor y puedes moverla cuando quieras. El cobro y la entrega los gestiona Tebex.",
+      "plans": [
+        {
+          "label": "Un servidor",
+          "price": "{minPrice}",
+          "priceNote": {
+            "one": "pago único",
+            "other": "desde / script"
+          },
+          "text": "Para el servidor que compra los scripts que necesita, uno a uno.",
+          "features": [
+            "1 servidor de producción",
+            "Código completo, sin escrow",
+            "Actualizaciones de por vida",
+            "Soporte en el Discord público"
+          ],
+          "cta": "Ver catálogo",
+          "ctaType": "catalog"
+        },
+        {
+          "label": "Pack completo",
+          "price": "{bundlePrice}",
+          "priceNote": "pago único",
+          "badge": "Más elegido",
+          "highlight": true,
+          "text": "Todo el catálogo actual más lo que se publique este año, en un solo pago.",
+          "features": [
+            {
+              "one": "El script del catálogo",
+              "other": "Los {availableCount} scripts disponibles"
+            },
+            "Lanzamientos de [periodo] incluidos",
+            "Canal de soporte prioritario",
+            "Migración desde tu script actual"
+          ],
+          "cta": "Comprar el pack en Tebex",
+          "ctaType": "bundle"
+        },
+        {
+          "label": "Red de servidores",
+          "price": "A medida",
+          "text": "Para redes con varios servidores o desarrollos hechos a petición.",
+          "features": [
+            "Licencia para varias IP",
+            "Adaptaciones a vuestro framework",
+            "Contacto directo por Discord",
+            "Factura con IVA"
+          ],
+          "cta": "Hablar contigo",
+          "ctaType": "discord"
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "// Dudas",
+      "title": "Antes de comprar",
+      "note": "Si falta algo, pregúntalo en el Discord: se responde antes de que compres, no después.",
+      "items": [
+        {
+          "q": "¿Los scripts vienen con escrow?",
+          "a": "No. Recibes el recurso completo en Lua, comentado y sin cifrar. Puedes modificar el config, los textos y la lógica sin romper la licencia."
+        },
+        {
+          "q": "¿Funciona con Qbox o con un framework propio?",
+          "a": "Cada script indica los frameworks probados en su ficha. La capa de framework está aislada en un único archivo, así que adaptarlo a uno propio es cuestión de rellenar cuatro funciones."
+        },
+        {
+          "q": "¿Cómo recibo las actualizaciones?",
+          "a": "Desde el mismo enlace de descarga de tu compra en Tebex, que siempre sirve la última versión. Los cambios se anuncian en el changelog con la versión y el aviso de si hay que tocar la base de datos."
+        },
+        {
+          "q": "¿Hay reembolsos?",
+          "a": "Se tramitan a través de Tebex siguiendo [tu política de reembolsos]. Al ser producto digital con el código incluido, lo habitual es no admitir devolución salvo que el script no funcione y no se pueda arreglar."
+        },
+        {
+          "q": "¿Lo instaláis vosotros?",
+          "a": "La instalación estándar la hace cualquiera siguiendo la documentación. Si prefieres que la haga yo o necesitas una integración concreta, se acuerda aparte."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Deja de perder milisegundos en cosas que ya están resueltas.",
+      "text": "Entra al Discord, mira el resmon de cualquier script y decide con datos.",
+      "primary": "Ver catálogo",
+      "secondary": "Entrar al Discord"
+    }
+  },
+  "catalog": {
+    "breadcrumb": "Inicio / Catálogo",
+    "title": "Catálogo de scripts",
+    "subtitle": {
+      "one": "Un recurso en producción. La ficha incluye el resmon en reposo, los frameworks probados y el changelog completo.",
+      "other": "{scriptCount} recursos en producción. Cada ficha incluye el resmon en reposo, los frameworks probados y el changelog completo."
+    },
+    "search": "Buscar en el catálogo",
+    "filters": {
+      "category": "Categoría",
+      "framework": "Framework",
+      "price": "Precio",
+      "performance": "Rendimiento",
+      "priceRanges": [
+        "Hasta 20 €",
+        "20 – 35 €",
+        "Más de 35 €"
+      ],
+      "fastOnly": "Solo 0.01 ms o menos",
+      "clear": "Limpiar filtros"
+    },
+    "results": {
+      "count": "{count} resultados",
+      "countOne": "1 resultado",
+      "empty": "Ningún script cumple esos filtros.",
+      "sortLabel": "Ordenar",
+      "sortOptions": [
+        {
+          "value": "cpu",
+          "label": "Menor consumo"
+        },
+        {
+          "value": "price-asc",
+          "label": "Precio: de menor a mayor"
+        },
+        {
+          "value": "price-desc",
+          "label": "Precio: de mayor a menor"
+        },
+        {
+          "value": "name",
+          "label": "Nombre"
+        }
+      ]
+    },
+    "bundle": {
+      "title": "¿Los quieres todos?",
+      "text": "El pack completo sale a {bundlePrice} frente a los {individualTotal} por separado.",
+      "cta": "Comprar el pack en Tebex"
+    }
+  },
+  "product": {
+    "breadcrumb": "Catálogo",
+    "mediaPlaceholder": "[captura del script en juego · 1600 × 900]",
+    "mediaVideo": "vídeo",
+    "tabs": {
+      "description": "Descripción",
+      "install": "Instalación",
+      "api": "Exports y eventos",
+      "changelog": "Changelog",
+      "requirements": "Requisitos"
+    },
+    "performance": {
+      "title": "Rendimiento medido",
+      "columns": {
+        "scenario": "escenario",
+        "cpu": "cpu",
+        "memory": "memoria"
+      },
+      "note": "Medido en {hardware} con FiveM build {build} · [datos de ejemplo]"
+    },
+    "api": {
+      "title": "Exports principales",
+      "file": "server.lua",
+      "note": "Los {exports} exports y los {events} eventos están documentados con sus parámetros y su valor de retorno en la documentación."
+    },
+    "install": {
+      "title": "Instalación",
+      "steps": [
+        "Copia la carpeta <span class=\"mono-inline\">{name}</span> dentro de tu carpeta de recursos.",
+        "Importa el archivo <span class=\"mono-inline\">install.sql</span> en tu base de datos.",
+        "Añade <span class=\"mono-inline\">ensure {name}</span> a tu <span class=\"mono-inline\">server.cfg</span>, por debajo del framework.",
+        "Abre <span class=\"mono-inline\">config.lua</span> y ajusta las coordenadas, los precios y los textos.",
+        "Reinicia el servidor y comprueba el consumo con <span class=\"mono-inline\">resmon 1</span>."
+      ]
+    },
+    "requirements": {
+      "title": "Requisitos",
+      "none": "Ninguna dependencia externa.",
+      "buildNote": "Probado en la build recomendada de FiveM en la fecha de la última actualización."
+    },
+    "changelog": {
+      "title": "Changelog",
+      "note": "El historial completo, versión a versión, está en la documentación.",
+      "cta": "Ver el changelog"
+    },
+    "aside": {
+      "packageLabel": "Paquete de Tebex",
+      "licenceOption": "1 servidor de producción",
+      "vat": "IVA incluido",
+      "buy": "Comprar en Tebex",
+      "docs": "Leer la documentación",
+      "checkoutNote": "Checkout y factura a cargo de Tebex",
+      "includes": [
+        "Entrega automática al confirmarse el pago",
+        "Código completo, sin escrow",
+        "Actualizaciones de por vida desde tu compra",
+        "Soporte en el Discord"
+      ],
+      "specTitle": "Ficha técnica",
+      "spec": {
+        "version": "Versión",
+        "updated": "Actualizado",
+        "frameworks": "Frameworks",
+        "dependencies": "Dependencias",
+        "size": "Tamaño",
+        "locales": "Idiomas",
+        "category": "Categoría",
+        "none": "Ninguna"
+      },
+      "supportTitle": "¿Dudas antes de comprar?",
+      "supportText": "Pregunta en el canal de preventa del Discord. Se responde antes de que pagues, no después.",
+      "supportCta": "Abrir el Discord",
+      "crossSellTitle": "Se compra junto con",
+      "bundleRow": "Pack completo"
+    },
+    "betaNotice": "Este script está en beta cerrada: todavía no se vende. Apúntate en el Discord para probarlo."
+  },
+  "footer": {
+    "tagline": "Scripts de FiveM medidos, documentados y sin ofuscar.",
+    "columns": [
+      {
+        "title": "Producto",
+        "items": [
+          {
+            "label": "Catálogo",
+            "type": "catalog"
+          },
+          {
+            "label": "Pack completo",
+            "type": "bundle"
+          },
+          {
+            "label": "Changelog",
+            "type": "changelog"
+          }
+        ]
+      },
+      {
+        "title": "Recursos",
+        "items": [
+          {
+            "label": "Documentación",
+            "type": "docs"
+          },
+          {
+            "label": "Guía de instalación",
+            "type": "docs"
+          },
+          {
+            "label": "Discord",
+            "type": "discord"
+          }
+        ]
+      },
+      {
+        "title": "Legal",
+        "items": [
+          {
+            "label": "Licencia de uso",
+            "type": "docs"
+          },
+          {
+            "label": "Términos",
+            "type": "docs"
+          },
+          {
+            "label": "Privacidad",
+            "type": "docs"
+          }
+        ]
+      }
+    ],
+    "copyright": "© {year} {fullName} · {domain}",
+    "disclaimer": "Pagos gestionados por Tebex · No afiliado a Rockstar Games ni a Cfx.re"
+  },
+  "notFound": {
+    "title": "Esta página no existe",
+    "text": "El enlace que has seguido no lleva a ninguna parte. Vuelve al catálogo o pregunta en el Discord.",
+    "cta": "Ver catálogo"
+  }
+}

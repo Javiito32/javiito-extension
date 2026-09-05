@@ -1,0 +1,419 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      background: #0A0B0D;
+      color: #E7E9EC;
+      font-family: 'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #B4F133; text-decoration: none; }
+    a:hover { color: #CFF77A; }
+    h1, h2, h3, p { margin: 0; text-wrap: pretty; }
+  </style>
+</helmet>
+
+<div style="--acc: {{accent}}; --ink: #0A0B0D; background: #0A0B0D; width: 1440px; min-height: 100%; font-family: 'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+
+  <!-- TOPBAR -->
+  <div style="display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 96px; border-bottom: 1px solid #212429; background: rgba(10,11,13,0.92);">
+    <div style="display: flex; align-items: center; gap: 40px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 26px; height: 26px; border-radius: 4px; background: var(--acc); color: var(--ink); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; font-weight: 700; letter-spacing: -0.02em;">jx</div>
+        <div style="position: relative; width: 132px; height: 34px;">
+          <span style="position: absolute; left: 0; top: 0; z-index: 1; font-size: 19px; line-height: 1; font-weight: 600; letter-spacing: -0.02em; color: #E7E9EC;">Javiito</span>
+          <span style="position: absolute; left: 36px; top: 12px; z-index: 2; font-family: 'Caveat', 'Segoe Script', 'Bradley Hand', cursive; font-size: 22px; line-height: 1; font-weight: 600; color: var(--acc); transform: rotate(-4deg); transform-origin: left center; white-space: nowrap;">Extensions</span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 28px; font-size: 14px; color: #9AA0A9;">
+        <span style="color: #E7E9EC;">Catálogo</span>
+        <span>Documentación</span>
+        <span>Changelog</span>
+        <span>Soporte</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; color: #9AA0A9;">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 10.5a1.5 1.5 0 01-1.5 1.5H5l-3 2.5V4a1.5 1.5 0 011.5-1.5h8A1.5 1.5 0 0113 4z"/></svg>
+        Discord
+      </div>
+      <div style="display: flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 4px; background: var(--acc); color: var(--ink); font-size: 13px; font-weight: 600;">Mis compras</div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div style="position: relative; padding: 104px 96px 88px; border-bottom: 1px solid #212429; background-image: linear-gradient(to right, rgba(255,255,255,0.022) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.022) 1px, transparent 1px); background-size: 48px 48px;">
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) 520px; gap: 72px; max-width: 1248px; margin: 0 auto; align-items: start;">
+
+      <div style="display: flex; flex-direction: column; gap: 28px; padding-top: 8px;">
+        <div style="display: flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6A7079;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--acc);"></span>
+          ESX · QBCore · Qbox · Standalone
+        </div>
+
+        <h1 style="font-size: 60px; line-height: 1.02; letter-spacing: -0.035em; font-weight: 600; color: #F2F4F6; max-width: 640px;">Scripts para FiveM que no se comen tu servidor.</h1>
+
+        <p style="font-size: 17px; line-height: 1.62; color: #9AA0A9; max-width: 560px;">Cada recurso se publica con su medición de <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC;">resmon</span> real, código sin ofuscar y actualizaciones incluidas. Si en reposo pasa de 0,05 ms, no sale a la venta.</p>
+
+        <div style="display: flex; align-items: center; gap: 12px; padding-top: 4px;">
+          <div style="display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 22px; border-radius: 4px; background: var(--acc); color: var(--ink); font-size: 15px; font-weight: 600;">
+            Ver catálogo
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 22px; border-radius: 4px; border: 1px solid #2B2F36; color: #E7E9EC; font-size: 15px; font-weight: 500;">Cómo medimos el rendimiento</div>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 8px 20px; padding-top: 12px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #6A7079;">
+          <span>Sin escrow</span><span style="color: #2B2F36;">/</span>
+          <span>Sin ofuscar</span><span style="color: #2B2F36;">/</span>
+          <span>Actualizaciones de por vida</span><span style="color: #2B2F36;">/</span>
+          <span>Soporte en Discord</span><span style="color: #2B2F36;">/</span>
+          <span>Pago seguro con Tebex</span>
+        </div>
+      </div>
+
+      <!-- resmon panel -->
+      <div style="border: 1px solid #212429; border-radius: 6px; background: #0E1014; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.5);">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 13px 16px; border-bottom: 1px solid #212429; background: #101317;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #9AA0A9;">resmon · [tu-servidor]</span>
+          <span style="display: flex; align-items: center; gap: 7px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #6A7079;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--acc);"></span>
+            64 / 128
+          </span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 78px 82px; gap: 0; padding: 10px 16px; border-bottom: 1px solid #191C21; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #565C66;">
+          <span>recurso</span><span style="text-align: right;">cpu</span><span style="text-align: right;">memoria</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 78px 82px; padding: 11px 16px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; color: #E7E9EC; background: rgba(180,241,51,0.05);">
+          <span style="color: var(--acc);">jex-garage</span><span style="text-align: right; color: var(--acc);">0.01 ms</span><span style="text-align: right; color: #9AA0A9;">1.24 MB</span>
+        </div>
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 78px 82px; padding: 11px 16px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; background: rgba(180,241,51,0.05);">
+          <span style="color: var(--acc);">jex-hud</span><span style="text-align: right; color: var(--acc);">0.00 ms</span><span style="text-align: right; color: #9AA0A9;">0.86 MB</span>
+        </div>
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 78px 82px; padding: 11px 16px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px;">
+          <span style="color: #9AA0A9;">jex-multichar</span><span style="text-align: right; color: var(--acc);">0.00 ms</span><span style="text-align: right; color: #6A7079;">0.42 MB</span>
+        </div>
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 78px 82px; padding: 11px 16px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px;">
+          <span style="color: #6A7079;">es_extended</span><span style="text-align: right; color: #9AA0A9;">0.06 ms</span><span style="text-align: right; color: #6A7079;">12.4 MB</span>
+        </div>
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 78px 82px; padding: 11px 16px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px;">
+          <span style="color: #6A7079;">ox_inventory</span><span style="text-align: right; color: #9AA0A9;">0.03 ms</span><span style="text-align: right; color: #6A7079;">4.10 MB</span>
+        </div>
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 78px 82px; padding: 11px 16px; border-top: 1px solid #191C21; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px;">
+          <span style="color: #6A7079;">garage_legacy</span><span style="text-align: right; color: #E0705C;">0.38 ms</span><span style="text-align: right; color: #6A7079;">9.80 MB</span>
+        </div>
+
+        <div style="padding: 14px 16px; border-top: 1px solid #212429; background: #101317; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; line-height: 1.6; color: #6A7079;">
+          Captura de referencia · 64 jugadores conectados · [datos de ejemplo]
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMPATIBILIDAD -->
+  <div style="padding: 28px 96px; border-bottom: 1px solid #212429; background: #0C0E11;">
+    <div style="display: flex; align-items: center; gap: 32px; max-width: 1248px; margin: 0 auto;">
+      <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #565C66; white-space: nowrap;">Compatible con</span>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #9AA0A9;">ESX Legacy</span>
+        <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #9AA0A9;">QBCore</span>
+        <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #9AA0A9;">Qbox</span>
+        <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #9AA0A9;">ox_lib</span>
+        <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #9AA0A9;">ox_inventory</span>
+        <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #9AA0A9;">oxmysql</span>
+        <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #9AA0A9;">qb-target</span>
+      </div>
+      <span style="margin-left: auto; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #565C66; white-space: nowrap;">[N] servidores activos</span>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div style="padding: 88px 96px; border-bottom: 1px solid #212429;">
+    <div style="max-width: 1248px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px;">
+      <div style="display: flex; flex-direction: column; gap: 14px; max-width: 620px;">
+        <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc);">// Cómo trabajamos</span>
+        <h2 style="font-size: 34px; line-height: 1.12; letter-spacing: -0.025em; font-weight: 600; color: #F2F4F6;">Cuatro cosas que damos por sentadas y casi nadie cumple.</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: #212429; border: 1px solid #212429; border-radius: 6px; overflow: hidden;">
+        <div style="display: flex; flex-direction: column; gap: 14px; padding: 32px 28px; background: #0C0E11; min-height: 232px;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--acc);">01</span>
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="#E7E9EC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1.5L3.5 9H8l-1 5.5L12.5 7H8z"/></svg>
+          <h3 style="font-size: 17px; font-weight: 600; letter-spacing: -0.01em; color: #E7E9EC;">Rendimiento medido</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: #9AA0A9;">Publicamos el resmon real de cada script, en reposo y bajo carga con 64 jugadores. Sin capturas retocadas.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px; padding: 32px 28px; background: #0C0E11; min-height: 232px;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--acc);">02</span>
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="#E7E9EC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 4.5L2 8l3.5 3.5M10.5 4.5L14 8l-3.5 3.5"/></svg>
+          <h3 style="font-size: 17px; font-weight: 600; letter-spacing: -0.01em; color: #E7E9EC;">Código abierto</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: #9AA0A9;">Sin escrow ni ofuscación. Puedes leerlo, auditarlo y adaptarlo al flujo de tu servidor sin pedir permiso.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px; padding: 32px 28px; background: #0C0E11; min-height: 232px;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--acc);">03</span>
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="#E7E9EC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5h4a2 2 0 012 2v7a1.5 1.5 0 00-1.5-1.5H2.5zM13.5 3.5h-4a2 2 0 00-2 2v7a1.5 1.5 0 011.5-1.5h4.5z"/></svg>
+          <h3 style="font-size: 17px; font-weight: 600; letter-spacing: -0.01em; color: #E7E9EC;">Instalación en minutos</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: #9AA0A9;">Una carpeta, un ensure y el SQL. Documentación con cada export, cada evento y cada valor del config.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px; padding: 32px 28px; background: #0C0E11; min-height: 232px;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: var(--acc);">04</span>
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="#E7E9EC" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 8a5.5 5.5 0 01-9.4 3.9M2.5 8a5.5 5.5 0 019.4-3.9M12 2.4v2.3H9.7M4 13.6v-2.3h2.3"/></svg>
+          <h3 style="font-size: 17px; font-weight: 600; letter-spacing: -0.01em; color: #E7E9EC;">Actualizaciones incluidas</h3>
+          <p style="font-size: 14px; line-height: 1.6; color: #9AA0A9;">Compras una vez. Parches, compatibilidad con nuevas builds y funciones nuevas sin coste adicional.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS DESTACADOS -->
+  <div style="padding: 88px 96px; border-bottom: 1px solid #212429; background: #0C0E11;">
+    <div style="max-width: 1248px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 32px;">
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc);">// Catálogo</span>
+          <h2 style="font-size: 34px; line-height: 1.12; letter-spacing: -0.025em; font-weight: 600; color: #F2F4F6;">Scripts destacados</h2>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 14px; color: #E7E9EC;">
+          Ver los [N] scripts
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </div>
+      </div>
+
+      <div style="border: 1px solid #212429; border-radius: 6px; overflow: hidden; background: #0A0B0D;">
+        <div style="display: grid; grid-template-columns: 220px minmax(0, 1fr) 100px 190px 110px 96px; gap: 24px; padding: 12px 24px; border-bottom: 1px solid #212429; background: #101317; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #565C66;">
+          <span>script</span><span>descripción</span><span style="text-align: right;">cpu reposo</span><span>framework</span><span style="text-align: right;">precio</span><span></span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 220px minmax(0, 1fr) 100px 190px 110px 96px; gap: 24px; align-items: center; padding: 20px 24px; border-bottom: 1px solid #191C21;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 14px; color: #E7E9EC;">jex-garage</span>
+          <span style="font-size: 14px; line-height: 1.5; color: #9AA0A9;">Garajes con depósito, tuning persistente y multipropiedad por sociedad.</span>
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--acc); text-align: right;">0.01 ms</span>
+          <span style="display: flex; gap: 6px;">
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">ESX</span>
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">QB</span>
+          </span>
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 14px; color: #E7E9EC; text-align: right;">24,99 €</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; height: 34px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; font-weight: 500; color: #E7E9EC;">Ver</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 220px minmax(0, 1fr) 100px 190px 110px 96px; gap: 24px; align-items: center; padding: 20px 24px; border-bottom: 1px solid #191C21;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 14px; color: #E7E9EC;">jex-hud</span>
+          <span style="font-size: 14px; line-height: 1.5; color: #9AA0A9;">HUD modular con editor dentro del juego y presets guardados por rol.</span>
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--acc); text-align: right;">0.00 ms</span>
+          <span style="display: flex; gap: 6px;">
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">Standalone</span>
+          </span>
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 14px; color: #E7E9EC; text-align: right;">18,99 €</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; height: 34px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; font-weight: 500; color: #E7E9EC;">Ver</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 220px minmax(0, 1fr) 100px 190px 110px 96px; gap: 24px; align-items: center; padding: 20px 24px; border-bottom: 1px solid #191C21;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 14px; color: #E7E9EC;">jex-multichar</span>
+          <span style="font-size: 14px; line-height: 1.5; color: #9AA0A9;">Selector de personajes con cámara cinemática y slots según licencia.</span>
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--acc); text-align: right;">0.00 ms</span>
+          <span style="display: flex; gap: 6px;">
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">ESX</span>
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">QB</span>
+          </span>
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 14px; color: #E7E9EC; text-align: right;">21,99 €</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; height: 34px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; font-weight: 500; color: #E7E9EC;">Ver</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 220px minmax(0, 1fr) 100px 190px 110px 96px; gap: 24px; align-items: center; padding: 20px 24px;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 14px; color: #E7E9EC;">jex-jobs</span>
+          <span style="font-size: 14px; line-height: 1.5; color: #9AA0A9;">Sistema de trabajos con turnos, nóminas automáticas y jerarquías editables.</span>
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--acc); text-align: right;">0.02 ms</span>
+          <span style="display: flex; gap: 6px;">
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">QB</span>
+            <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">Qbox</span>
+          </span>
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 14px; color: #E7E9EC; text-align: right;">34,99 €</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; height: 34px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; font-weight: 500; color: #E7E9EC;">Ver</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LICENCIAS -->
+  <div style="padding: 88px 96px; border-bottom: 1px solid #212429;">
+    <div style="max-width: 1248px; margin: 0 auto; display: flex; flex-direction: column; gap: 44px;">
+      <div style="display: flex; flex-direction: column; gap: 14px; max-width: 620px;">
+        <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc);">// Licencias</span>
+        <h2 style="font-size: 34px; line-height: 1.12; letter-spacing: -0.025em; font-weight: 600; color: #F2F4F6;">Pagas una vez por servidor.</h2>
+        <p style="font-size: 15px; line-height: 1.6; color: #9AA0A9;">Sin suscripción mensual y sin límite de jugadores. La licencia se ata a la IP del servidor y puedes moverla cuando quieras. El cobro y la entrega los gestiona Tebex.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+
+        <div style="display: flex; flex-direction: column; gap: 22px; padding: 30px 28px; border: 1px solid #212429; border-radius: 6px; background: #0C0E11;">
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6A7079;">Un servidor</span>
+            <div style="display: flex; align-items: baseline; gap: 8px;">
+              <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 32px; font-weight: 500; letter-spacing: -0.02em; color: #F2F4F6;">18,99 €</span>
+              <span style="font-size: 13px; color: #6A7079;">desde / script</span>
+            </div>
+          </div>
+          <p style="font-size: 14px; line-height: 1.6; color: #9AA0A9;">Para el servidor que compra los scripts que necesita, uno a uno.</p>
+          <div style="display: flex; flex-direction: column; gap: 11px; padding-top: 4px;">
+            <span style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: #9AA0A9;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#B4F133" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;"><path d="M3 8.5l3.5 3.5L13 5"/></svg>1 servidor de producción</span>
+            <span style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: #9AA0A9;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#B4F133" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;"><path d="M3 8.5l3.5 3.5L13 5"/></svg>Código completo, sin escrow</span>
+            <span style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: #9AA0A9;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#B4F133" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;"><path d="M3 8.5l3.5 3.5L13 5"/></svg>Actualizaciones de por vida</span>
+            <span style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: #9AA0A9;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#B4F133" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;"><path d="M3 8.5l3.5 3.5L13 5"/></svg>Soporte en el Discord público</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: center; height: 44px; margin-top: auto; border: 1px solid #2B2F36; border-radius: 4px; font-size: 14px; font-weight: 500; color: #E7E9EC;">Ver catálogo</div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 22px; padding: 30px 28px; border: 1px solid var(--acc); border-radius: 6px; background: #0E1014; position: relative;">
+          <span style="position: absolute; top: -10px; left: 28px; height: 20px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 3px; background: var(--acc); color: var(--ink); font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;">Más elegido</span>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6A7079;">Pack completo</span>
+            <div style="display: flex; align-items: baseline; gap: 8px;">
+              <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 32px; font-weight: 500; letter-spacing: -0.02em; color: #F2F4F6;">149,00 €</span>
+              <span style="font-size: 13px; color: #6A7079;">pago único</span>
+            </div>
+          </div>
+          <p style="font-size: 14px; line-height: 1.6; color: #9AA0A9;">Todo el catálogo actual más lo que se publique este año, en un solo pago.</p>
+          <div style="display: flex; flex-direction: column; gap: 11px; padding-top: 4px;">
+            <span style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: #9AA0A9;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#B4F133" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;"><path d="M3 8.5l3.5 3.5L13 5"/></svg>Los [N] scripts del catálogo</span>
+            <span style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: #9AA0A9;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#B4F133" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;"><path d="M3 8.5l3.5 3.5L13 5"/></svg>Lanzamientos de [periodo] incluidos</span>
+            <span style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: #9AA0A9;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#B4F133" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;"><path d="M3 8.5l3.5 3.5L13 5"/></svg>Canal de soporte prioritario</span>
+            <span style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: #9AA0A9;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#B4F133" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;"><path d="M3 8.5l3.5 3.5L13 5"/></svg>Migración desde tu script actual</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 9px; height: 44px; margin-top: auto; border-radius: 4px; background: var(--acc); color: var(--ink); font-size: 14px; font-weight: 600;">Comprar el pack en Tebex<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3H3.5A1.5 1.5 0 002 4.5v8A1.5 1.5 0 003.5 14h8a1.5 1.5 0 001.5-1.5V9.5"/><path d="M9.5 2.5H14v4.5M14 2.5L7.5 9"/></svg></div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 22px; padding: 30px 28px; border: 1px solid #212429; border-radius: 6px; background: #0C0E11;">
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6A7079;">Red de servidores</span>
+            <div style="display: flex; align-items: baseline; gap: 8px;">
+              <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 32px; font-weight: 500; letter-spacing: -0.02em; color: #F2F4F6;">A medida</span>
+            </div>
+          </div>
+          <p style="font-size: 14px; line-height: 1.6; color: #9AA0A9;">Para redes con varios servidores o desarrollos hechos a petición.</p>
+          <div style="display: flex; flex-direction: column; gap: 11px; padding-top: 4px;">
+            <span style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: #9AA0A9;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#B4F133" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;"><path d="M3 8.5l3.5 3.5L13 5"/></svg>Licencia para varias IP</span>
+            <span style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: #9AA0A9;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#B4F133" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;"><path d="M3 8.5l3.5 3.5L13 5"/></svg>Adaptaciones a vuestro framework</span>
+            <span style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: #9AA0A9;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#B4F133" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;"><path d="M3 8.5l3.5 3.5L13 5"/></svg>Contacto directo por Discord</span>
+            <span style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.5; color: #9AA0A9;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#B4F133" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;"><path d="M3 8.5l3.5 3.5L13 5"/></svg>Factura con IVA</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: center; height: 44px; margin-top: auto; border: 1px solid #2B2F36; border-radius: 4px; font-size: 14px; font-weight: 500; color: #E7E9EC;">Hablar contigo</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div style="padding: 88px 96px; border-bottom: 1px solid #212429; background: #0C0E11;">
+    <div style="display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 72px; max-width: 1248px; margin: 0 auto;">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc);">// Dudas</span>
+        <h2 style="font-size: 34px; line-height: 1.12; letter-spacing: -0.025em; font-weight: 600; color: #F2F4F6;">Antes de comprar</h2>
+        <p style="font-size: 14px; line-height: 1.6; color: #6A7079;">Si falta algo, pregúntalo en el Discord: se responde antes de que compres, no después.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 24px 0; border-top: 1px solid #212429;">
+          <h3 style="font-size: 16px; font-weight: 600; color: #E7E9EC;">¿Los scripts vienen con escrow?</h3>
+          <p style="font-size: 14px; line-height: 1.65; color: #9AA0A9; max-width: 720px;">No. Recibes el recurso completo en Lua, comentado y sin cifrar. Puedes modificar el config, los textos y la lógica sin romper la licencia.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 24px 0; border-top: 1px solid #212429;">
+          <h3 style="font-size: 16px; font-weight: 600; color: #E7E9EC;">¿Funciona con Qbox o con un framework propio?</h3>
+          <p style="font-size: 14px; line-height: 1.65; color: #9AA0A9; max-width: 720px;">Cada script indica los frameworks probados en su ficha. La capa de framework está aislada en un único archivo, así que adaptarlo a uno propio es cuestión de rellenar cuatro funciones.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 24px 0; border-top: 1px solid #212429;">
+          <h3 style="font-size: 16px; font-weight: 600; color: #E7E9EC;">¿Cómo recibo las actualizaciones?</h3>
+          <p style="font-size: 14px; line-height: 1.65; color: #9AA0A9; max-width: 720px;">Desde el mismo enlace de descarga de tu compra en Tebex, que siempre sirve la última versión. Los cambios se anuncian en el changelog con la versión y el aviso de si hay que tocar la base de datos.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 24px 0; border-top: 1px solid #212429;">
+          <h3 style="font-size: 16px; font-weight: 600; color: #E7E9EC;">¿Hay reembolsos?</h3>
+          <p style="font-size: 14px; line-height: 1.65; color: #9AA0A9; max-width: 720px;">Se tramitan a través de Tebex siguiendo [tu política de reembolsos]. Al ser producto digital con el código incluido, lo habitual es no admitir devolución salvo que el script no funcione y no se pueda arreglar.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 24px 0; border-top: 1px solid #212429; border-bottom: 1px solid #212429;">
+          <h3 style="font-size: 16px; font-weight: 600; color: #E7E9EC;">¿Lo instaláis vosotros?</h3>
+          <p style="font-size: 14px; line-height: 1.65; color: #9AA0A9; max-width: 720px;">La instalación estándar la hace cualquiera siguiendo la documentación. Si prefieres que la haga yo o necesitas una integración concreta, se acuerda aparte.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA FINAL -->
+  <div style="padding: 96px; border-bottom: 1px solid #212429; background-image: linear-gradient(to right, rgba(255,255,255,0.022) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.022) 1px, transparent 1px); background-size: 48px 48px;">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 48px; max-width: 1248px; margin: 0 auto;">
+      <div style="display: flex; flex-direction: column; gap: 14px; max-width: 620px;">
+        <h2 style="font-size: 40px; line-height: 1.08; letter-spacing: -0.03em; font-weight: 600; color: #F2F4F6;">Deja de perder milisegundos en cosas que ya están resueltas.</h2>
+        <p style="font-size: 16px; line-height: 1.6; color: #9AA0A9;">Entra al Discord, mira el resmon de cualquier script y decide con datos.</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
+        <div style="display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 24px; border-radius: 4px; background: var(--acc); color: var(--ink); font-size: 15px; font-weight: 600;">
+          Ver catálogo
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 24px; border: 1px solid #2B2F36; border-radius: 4px; color: #E7E9EC; font-size: 15px; font-weight: 500;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 10.5a1.5 1.5 0 01-1.5 1.5H5l-3 2.5V4a1.5 1.5 0 011.5-1.5h8A1.5 1.5 0 0113 4z"/></svg>
+          Entrar al Discord
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="padding: 56px 96px 40px;">
+    <div style="display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, 180px); gap: 48px; max-width: 1248px; margin: 0 auto;">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="width: 24px; height: 24px; border-radius: 4px; background: var(--acc); color: var(--ink); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 700;">jx</div>
+          <div style="position: relative; width: 194px; height: 50px;">
+            <span style="position: absolute; left: 0; top: 0; z-index: 1; font-size: 26px; line-height: 1; font-weight: 600; letter-spacing: -0.025em; color: #E7E9EC;">Javiito</span>
+            <span style="position: absolute; left: 52px; top: 17px; z-index: 2; font-family: 'Caveat', 'Segoe Script', 'Bradley Hand', cursive; font-size: 30px; line-height: 1; font-weight: 600; color: var(--acc); transform: rotate(-4deg); transform-origin: left center; white-space: nowrap;">Extensions</span>
+          </div>
+        </div>
+        <p style="font-size: 13px; line-height: 1.6; color: #6A7079; max-width: 300px;">Scripts de FiveM medidos, documentados y sin ofuscar.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #565C66;">Producto</span>
+        <span style="font-size: 13px; color: #9AA0A9;">Catálogo</span>
+        <span style="font-size: 13px; color: #9AA0A9;">Pack completo</span>
+        <span style="font-size: 13px; color: #9AA0A9;">Changelog</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #565C66;">Recursos</span>
+        <span style="font-size: 13px; color: #9AA0A9;">Documentación</span>
+        <span style="font-size: 13px; color: #9AA0A9;">Guía de instalación</span>
+        <span style="font-size: 13px; color: #9AA0A9;">Discord</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #565C66;">Legal</span>
+        <span style="font-size: 13px; color: #9AA0A9;">Licencia de uso</span>
+        <span style="font-size: 13px; color: #9AA0A9;">Términos</span>
+        <span style="font-size: 13px; color: #9AA0A9;">Privacidad</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1248px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid #212429; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #565C66;">
+      <span>© 2026 Javiito Extensions · [tudominio.com]</span>
+      <span>Pagos gestionados por Tebex · No afiliado a Rockstar Games ni a Cfx.re</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#B4F133","options":["#B4F133","#F0A62B","#4FD1C5","#8B7BFF"],"section":"Marca"},"$preview":{"width":1440,"height":3400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#B4F133' };
+  }
+}
+</script>
+</body>
+</html>

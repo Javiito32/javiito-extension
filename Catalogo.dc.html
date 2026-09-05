@@ -1,0 +1,281 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      background: #0A0B0D;
+      color: #E7E9EC;
+      font-family: 'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #B4F133; text-decoration: none; }
+    a:hover { color: #CFF77A; }
+    h1, h2, h3, p { margin: 0; text-wrap: pretty; }
+  </style>
+</helmet>
+
+<div style="--acc: {{accent}}; --ink: #0A0B0D; background: #0A0B0D; width: 1440px; min-height: 100%; font-family: 'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+
+  <!-- TOPBAR -->
+  <div style="display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 96px; border-bottom: 1px solid #212429;">
+    <div style="display: flex; align-items: center; gap: 40px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 26px; height: 26px; border-radius: 4px; background: var(--acc); color: var(--ink); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; font-weight: 700; letter-spacing: -0.02em;">jx</div>
+        <div style="position: relative; width: 132px; height: 34px;">
+          <span style="position: absolute; left: 0; top: 0; z-index: 1; font-size: 19px; line-height: 1; font-weight: 600; letter-spacing: -0.02em; color: #E7E9EC;">Javiito</span>
+          <span style="position: absolute; left: 36px; top: 12px; z-index: 2; font-family: 'Caveat', 'Segoe Script', 'Bradley Hand', cursive; font-size: 22px; line-height: 1; font-weight: 600; color: var(--acc); transform: rotate(-4deg); transform-origin: left center; white-space: nowrap;">Extensions</span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 28px; font-size: 14px; color: #9AA0A9;">
+        <span style="color: #E7E9EC; box-shadow: inset 0 -2px 0 0 var(--acc); padding-bottom: 3px;">Catálogo</span>
+        <span>Documentación</span>
+        <span>Changelog</span>
+        <span>Soporte</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; color: #9AA0A9;">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 10.5a1.5 1.5 0 01-1.5 1.5H5l-3 2.5V4a1.5 1.5 0 011.5-1.5h8A1.5 1.5 0 0113 4z"/></svg>
+        Discord
+      </div>
+      <div style="display: flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 4px; background: var(--acc); color: var(--ink); font-size: 13px; font-weight: 600;">Mis compras</div>
+    </div>
+  </div>
+
+  <!-- CABECERA -->
+  <div style="padding: 48px 96px 36px; border-bottom: 1px solid #212429;">
+    <div style="max-width: 1248px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #565C66;">Inicio / Catálogo</span>
+        <h1 style="font-size: 38px; line-height: 1.08; letter-spacing: -0.03em; font-weight: 600; color: #F2F4F6;">Catálogo de scripts</h1>
+        <p style="font-size: 15px; line-height: 1.6; color: #9AA0A9; max-width: 640px;">Ocho recursos en producción. Cada ficha incluye el resmon en reposo, los frameworks probados y el changelog completo.</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; height: 42px; padding: 0 16px; border: 1px solid #2B2F36; border-radius: 4px; width: 300px; color: #565C66;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.4 10.4L14 14"/></svg>
+        <span style="font-size: 14px;">Buscar en el catálogo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUERPO -->
+  <div style="padding: 40px 96px 88px;">
+    <div style="display: grid; grid-template-columns: 248px minmax(0, 1fr); gap: 40px; max-width: 1248px; margin: 0 auto; align-items: start;">
+
+      <!-- FILTROS -->
+      <div style="display: flex; flex-direction: column; gap: 32px; border: 1px solid #212429; border-radius: 6px; background: #0C0E11; padding: 24px 22px;">
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #565C66;">Categoría</span>
+          <div style="display: flex; flex-direction: column; gap: 2px;">
+            <span style="display: flex; align-items: center; justify-content: space-between; height: 32px; padding: 0 10px; border-radius: 3px; background: rgba(180,241,51,0.08); font-size: 14px; color: var(--acc);">Todas <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px;">8</span></span>
+            <span style="display: flex; align-items: center; justify-content: space-between; height: 32px; padding: 0 10px; font-size: 14px; color: #9AA0A9;">Vehículos <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #565C66;">1</span></span>
+            <span style="display: flex; align-items: center; justify-content: space-between; height: 32px; padding: 0 10px; font-size: 14px; color: #9AA0A9;">Interfaz <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #565C66;">3</span></span>
+            <span style="display: flex; align-items: center; justify-content: space-between; height: 32px; padding: 0 10px; font-size: 14px; color: #9AA0A9;">Economía <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #565C66;">2</span></span>
+            <span style="display: flex; align-items: center; justify-content: space-between; height: 32px; padding: 0 10px; font-size: 14px; color: #9AA0A9;">Trabajos <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #565C66;">1</span></span>
+            <span style="display: flex; align-items: center; justify-content: space-between; height: 32px; padding: 0 10px; font-size: 14px; color: #9AA0A9;">Seguridad <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #565C66;">1</span></span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 1px solid #212429;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #565C66;">Framework</span>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <span style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #E7E9EC;">
+              <span style="width: 16px; height: 16px; border-radius: 3px; background: var(--acc); display: flex; align-items: center; justify-content: center;"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="#0A0B0D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 5"/></svg></span>
+              ESX Legacy
+            </span>
+            <span style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #9AA0A9;">
+              <span style="width: 16px; height: 16px; border-radius: 3px; border: 1px solid #2B2F36;"></span>
+              QBCore
+            </span>
+            <span style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #9AA0A9;">
+              <span style="width: 16px; height: 16px; border-radius: 3px; border: 1px solid #2B2F36;"></span>
+              Qbox
+            </span>
+            <span style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #9AA0A9;">
+              <span style="width: 16px; height: 16px; border-radius: 3px; border: 1px solid #2B2F36;"></span>
+              Standalone
+            </span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 1px solid #212429;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #565C66;">Precio</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+            <span style="display: inline-flex; align-items: center; height: 30px; padding: 0 12px; border: 1px solid #2B2F36; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #9AA0A9;">Hasta 20 €</span>
+            <span style="display: inline-flex; align-items: center; height: 30px; padding: 0 12px; border: 1px solid #2B2F36; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #9AA0A9;">20 – 35 €</span>
+            <span style="display: inline-flex; align-items: center; height: 30px; padding: 0 12px; border: 1px solid #2B2F36; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #9AA0A9;">Más de 35 €</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 1px solid #212429;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #565C66;">Rendimiento</span>
+          <span style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #E7E9EC;">
+            <span style="width: 16px; height: 16px; border-radius: 3px; background: var(--acc); display: flex; align-items: center; justify-content: center;"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="#0A0B0D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.5 3.5L13 5"/></svg></span>
+            Solo 0.01 ms o menos
+          </span>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: center; height: 38px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; color: #9AA0A9;">Limpiar filtros</div>
+      </div>
+
+      <!-- RESULTADOS -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+
+        <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 4px;">
+          <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 12px; color: #6A7079;">8 resultados · filtro: ESX Legacy · ≤ 0.01 ms</span>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #565C66;">Ordenar</span>
+            <span style="display: inline-flex; align-items: center; gap: 10px; height: 34px; padding: 0 12px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; color: #E7E9EC;">
+              Menor consumo
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#6A7079" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5L8 10.5l4-4"/></svg>
+            </span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 88px 152px 96px 96px; gap: 20px; align-items: center; padding: 22px 24px; border: 1px solid #212429; border-radius: 6px; background: #0C0E11;">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC;">jex-garage</span>
+              <span style="font-size: 13px; line-height: 1.5; color: #9AA0A9;">Garajes con depósito, tuning persistente y multipropiedad por sociedad.</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--acc); text-align: right;">0.01 ms</span>
+            <div style="display: flex; gap: 6px;">
+              <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">ESX</span>
+              <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">QB</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC; text-align: right;">24,99 €</span>
+            <span style="display: inline-flex; align-items: center; justify-content: center; height: 36px; border-radius: 4px; background: var(--acc); color: var(--ink); font-size: 13px; font-weight: 600;">Ver</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 88px 152px 96px 96px; gap: 20px; align-items: center; padding: 22px 24px; border: 1px solid #212429; border-radius: 6px; background: #0C0E11;">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC;">jex-hud</span>
+              <span style="font-size: 13px; line-height: 1.5; color: #9AA0A9;">HUD modular con editor dentro del juego y presets guardados por rol.</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--acc); text-align: right;">0.00 ms</span>
+            <div style="display: flex; gap: 6px;">
+              <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">Standalone</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC; text-align: right;">18,99 €</span>
+            <span style="display: inline-flex; align-items: center; justify-content: center; height: 36px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; font-weight: 500; color: #E7E9EC;">Ver</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 88px 152px 96px 96px; gap: 20px; align-items: center; padding: 22px 24px; border: 1px solid #212429; border-radius: 6px; background: #0C0E11;">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC;">jex-multichar</span>
+              <span style="font-size: 13px; line-height: 1.5; color: #9AA0A9;">Selector de personajes con cámara cinemática y slots según licencia.</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--acc); text-align: right;">0.00 ms</span>
+            <div style="display: flex; gap: 6px;">
+              <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">ESX</span>
+              <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">QB</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC; text-align: right;">21,99 €</span>
+            <span style="display: inline-flex; align-items: center; justify-content: center; height: 36px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; font-weight: 500; color: #E7E9EC;">Ver</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 88px 152px 96px 96px; gap: 20px; align-items: center; padding: 22px 24px; border: 1px solid #212429; border-radius: 6px; background: #0C0E11;">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC;">jex-banking</span>
+              <span style="font-size: 13px; line-height: 1.5; color: #9AA0A9;">Banco con transferencias, cuentas de sociedad y extractos consultables.</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--acc); text-align: right;">0.00 ms</span>
+            <div style="display: flex; gap: 6px;">
+              <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">ESX</span>
+              <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">QB</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC; text-align: right;">19,99 €</span>
+            <span style="display: inline-flex; align-items: center; justify-content: center; height: 36px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; font-weight: 500; color: #E7E9EC;">Ver</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 88px 152px 96px 96px; gap: 20px; align-items: center; padding: 22px 24px; border: 1px solid #212429; border-radius: 6px; background: #0C0E11;">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC;">jex-inventory-ui</span>
+              <span style="font-size: 13px; line-height: 1.5; color: #9AA0A9;">Interfaz para ox_inventory con arrastre, hotbar y peso visible.</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; color: var(--acc); text-align: right;">0.01 ms</span>
+            <div style="display: flex; gap: 6px;">
+              <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">Standalone</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC; text-align: right;">29,99 €</span>
+            <span style="display: inline-flex; align-items: center; justify-content: center; height: 36px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; font-weight: 500; color: #E7E9EC;">Ver</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 88px 152px 96px 96px; gap: 20px; align-items: center; padding: 22px 24px; border: 1px solid #212429; border-radius: 6px; background: #0C0E11;">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC;">jex-jobs</span>
+              <span style="font-size: 13px; line-height: 1.5; color: #9AA0A9;">Sistema de trabajos con turnos, nóminas automáticas y jerarquías editables.</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; color: #9AA0A9; text-align: right;">0.02 ms</span>
+            <div style="display: flex; gap: 6px;">
+              <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">QB</span>
+              <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">Qbox</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC; text-align: right;">34,99 €</span>
+            <span style="display: inline-flex; align-items: center; justify-content: center; height: 36px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; font-weight: 500; color: #E7E9EC;">Ver</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 88px 152px 96px 96px; gap: 20px; align-items: center; padding: 22px 24px; border: 1px solid #212429; border-radius: 6px; background: #0C0E11;">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC;">jex-anticheat</span>
+              <span style="font-size: 13px; line-height: 1.5; color: #9AA0A9;">Detecciones del lado del servidor con registro y avisos en Discord.</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; color: #9AA0A9; text-align: right;">0.03 ms</span>
+            <div style="display: flex; gap: 6px;">
+              <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">Standalone</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC; text-align: right;">39,99 €</span>
+            <span style="display: inline-flex; align-items: center; justify-content: center; height: 36px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; font-weight: 500; color: #E7E9EC;">Ver</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) 88px 152px 96px 96px; gap: 20px; align-items: center; padding: 22px 24px; border: 1px solid #212429; border-radius: 6px; background: #0C0E11; opacity: 0.72;">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #E7E9EC;">jex-phone</span>
+                <span style="display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border: 1px solid #2B2F36; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6A7079;">Beta cerrada</span>
+              </div>
+              <span style="font-size: 13px; line-height: 1.5; color: #9AA0A9;">Teléfono con mensajes, mercado y cámara. La NUI no se carga en reposo.</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 13px; color: #9AA0A9; text-align: right;">0.01 ms</span>
+            <div style="display: flex; gap: 6px;">
+              <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">ESX</span>
+              <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border: 1px solid #212429; border-radius: 3px; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: #9AA0A9;">QB</span>
+            </div>
+            <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 15px; color: #6A7079; text-align: right;">44,99 €</span>
+            <span style="display: inline-flex; align-items: center; justify-content: center; height: 36px; border: 1px solid #2B2F36; border-radius: 4px; font-size: 13px; font-weight: 500; color: #6A7079;">Lista</span>
+          </div>
+
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px; padding: 22px 24px; border: 1px solid #212429; border-radius: 6px; background: #0E1014;">
+          <div style="display: flex; flex-direction: column; gap: 5px;">
+            <span style="font-size: 15px; font-weight: 600; color: #E7E9EC;">¿Los quieres todos?</span>
+            <span style="font-size: 13px; color: #9AA0A9;">El pack completo sale a 149,00 € frente a los 230,92 € por separado.</span>
+          </div>
+          <span style="display: inline-flex; align-items: center; gap: 9px; height: 42px; padding: 0 20px; border-radius: 4px; background: var(--acc); color: var(--ink); font-size: 14px; font-weight: 600;">Comprar el pack en Tebex<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3H3.5A1.5 1.5 0 002 4.5v8A1.5 1.5 0 003.5 14h8a1.5 1.5 0 001.5-1.5V9.5"/><path d="M9.5 2.5H14v4.5M14 2.5L7.5 9"/></svg></span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#B4F133","options":["#B4F133","#F0A62B","#4FD1C5","#8B7BFF"],"section":"Marca"},"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#B4F133' };
+  }
+}
+</script>
+</body>
+</html>
