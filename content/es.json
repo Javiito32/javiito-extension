@@ -12,6 +12,10 @@
       "title": "Catálogo de scripts · {brand}",
       "description": "Los {scriptCount} scripts de {brand} con su consumo en reposo, sus frameworks compatibles y su precio."
     },
+    "docs": {
+      "title": "Documentación · {brand}",
+      "description": "Instalación, exports, requisitos, historial de versiones y condiciones de los scripts de {brand}. Toda la documentación en la propia web."
+    },
     "product": {
       "title": "{name} · {brand}",
       "description": "{tagline} Consumo en reposo: {idle}. Compatible con {frameworks}."
@@ -23,7 +27,7 @@
     "changelog": "Changelog",
     "support": "Soporte",
     "discord": "Discord",
-    "orders": "Mis compras"
+    "store": "Ir a la tienda"
   },
   "common": {
     "view": "Ver",
@@ -259,6 +263,71 @@
       "cta": "Comprar el pack en Tebex"
     }
   },
+  "docs": {
+    "breadcrumb": "Inicio / Documentación",
+    "title": "Documentación",
+    "subtitle": "Instalación, exports, requisitos, versiones y condiciones. Está todo en esta página: no hay wiki aparte ni enlaces a otras webs.",
+    "tocTitle": "En esta página",
+    "performance": {
+      "title": "Cómo medimos el rendimiento",
+      "text": "Cada script se mide con <span class=\"mono-inline\">resmon 1</span> en un servidor limpio: primero en reposo, con el recurso cargado y nada en pantalla, y después en el peor escenario que se espera en producción. Se publican los dos valores, nunca una media. Si en reposo pasa de 0,05 ms, no sale a la venta.",
+      "note": "Mediciones hechas en {hardware} con FiveM build {build}. La tabla completa de cada script está en su ficha."
+    },
+    "scripts": {
+      "title": "Instalación y uso",
+      "text": "Cada script con sus pasos de instalación, su API y sus requisitos. Los mismos textos que verás en su ficha, juntos y en una sola página."
+    },
+    "script": {
+      "install": "Instalación",
+      "api": "Exports y eventos",
+      "requirements": "Requisitos",
+      "product": "Ver la ficha del script",
+      "buy": "Comprar en Tebex",
+      "beta": "En beta cerrada: todavía no se vende. Apúntate en el Discord para probarlo.",
+      "manual": "Manual completo",
+      "manualNav": "En este manual"
+    },
+    "changelog": {
+      "title": "Historial de versiones",
+      "text": "Cada versión con su fecha y lo que cambia. Las actualizaciones se descargan desde el mismo enlace de tu compra en Tebex, que siempre sirve la última.",
+      "columns": {
+        "changes": "cambios",
+        "version": "versión",
+        "date": "fecha"
+      }
+    },
+    "legal": {
+      "title": "Licencia y condiciones",
+      "items": [
+        {
+          "id": "license",
+          "title": "Licencia de uso",
+          "text": "Cada compra incluye una licencia para un servidor de producción. Recibes el código completo, sin escrow y sin ofuscar: puedes editar el config, los textos y la lógica para adaptarlo a tu servidor. No se permite revender, redistribuir ni publicar el código, ni entero ni por partes. Para redes con varias IP, se acuerda por Discord."
+        },
+        {
+          "id": "terms",
+          "title": "Términos",
+          "text": "La venta, el cobro y la factura los gestiona Tebex desde la tienda, así que al comprar aceptas también sus condiciones. La entrega es automática en cuanto se confirma el pago y las actualizaciones salen del mismo enlace de tu compra, sin coste añadido."
+        },
+        {
+          "id": "privacy",
+          "title": "Privacidad",
+          "text": "Esta web es estática: no tiene cuentas, ni formularios, ni analítica, ni cookies propias. Las tipografías se cargan desde Google Fonts, que ve tu IP al servirlas. Los datos de pago los trata Tebex y el soporte se lleva por Discord: aquí no se guarda nada tuyo."
+        },
+        {
+          "id": "refunds",
+          "title": "Reembolsos",
+          "text": "Se tramitan a través de Tebex siguiendo [tu política de reembolsos]. Al ser producto digital con el código incluido, lo habitual es no admitir devolución salvo que el script no funcione y no se pueda arreglar; escribe por Discord antes de abrir la solicitud."
+        }
+      ]
+    },
+    "support": {
+      "title": "Soporte",
+      "text": "El soporte se lleva entero en el Discord: preventa, instalación y errores. No hay tickets por correo ni foro aparte, y se responde también antes de que compres.",
+      "discord": "Entrar al Discord",
+      "store": "Ver la tienda en Tebex"
+    }
+  },
   "product": {
     "breadcrumb": "Catálogo",
     "mediaPlaceholder": "[captura del script en juego · 1600 × 900]",
@@ -282,7 +351,8 @@
     "api": {
       "title": "Exports principales",
       "file": "server.lua",
-      "note": "Los {exports} exports y los {events} eventos están documentados con sus parámetros y su valor de retorno en la documentación."
+      "note": "Los {exports} exports y los {events} eventos están documentados con sus parámetros y su valor de retorno en la documentación de esta web.",
+      "manualCta": "Ver el manual completo"
     },
     "install": {
       "title": "Instalación",
@@ -301,8 +371,8 @@
     },
     "changelog": {
       "title": "Changelog",
-      "note": "El historial completo, versión a versión, está en la documentación.",
-      "cta": "Ver el changelog"
+      "note": "El historial completo, versión a versión, está en la documentación de esta misma web.",
+      "cta": "Ver el historial de versiones"
     },
     "aside": {
       "packageLabel": "Paquete de Tebex",
@@ -351,8 +421,8 @@
             "type": "bundle"
           },
           {
-            "label": "Changelog",
-            "type": "changelog"
+            "label": "Tienda en Tebex",
+            "type": "store"
           }
         ]
       },
@@ -365,7 +435,13 @@
           },
           {
             "label": "Guía de instalación",
-            "type": "docs"
+            "type": "docs",
+            "anchor": "install"
+          },
+          {
+            "label": "Historial de versiones",
+            "type": "docs",
+            "anchor": "changelog"
           },
           {
             "label": "Discord",
@@ -378,15 +454,18 @@
         "items": [
           {
             "label": "Licencia de uso",
-            "type": "docs"
+            "type": "docs",
+            "anchor": "license"
           },
           {
             "label": "Términos",
-            "type": "docs"
+            "type": "docs",
+            "anchor": "terms"
           },
           {
             "label": "Privacidad",
-            "type": "docs"
+            "type": "docs",
+            "anchor": "privacy"
           }
         ]
       }

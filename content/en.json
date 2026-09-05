@@ -12,6 +12,10 @@
       "title": "Script catalog · {brand}",
       "description": "All {scriptCount} {brand} scripts with their idle usage, supported frameworks and price."
     },
+    "docs": {
+      "title": "Documentation · {brand}",
+      "description": "Installation, exports, requirements, version history and terms for every {brand} script. All the documentation lives on this site."
+    },
     "product": {
       "title": "{name} · {brand}",
       "description": "{tagline} Idle usage: {idle}. Works with {frameworks}."
@@ -23,7 +27,7 @@
     "changelog": "Changelog",
     "support": "Support",
     "discord": "Discord",
-    "orders": "My purchases"
+    "store": "Go to the store"
   },
   "common": {
     "view": "View",
@@ -259,6 +263,71 @@
       "cta": "Buy the bundle on Tebex"
     }
   },
+  "docs": {
+    "breadcrumb": "Home / Documentation",
+    "title": "Documentation",
+    "subtitle": "Installation, exports, requirements, versions and terms. It is all on this page: no separate wiki, no links to other sites.",
+    "tocTitle": "On this page",
+    "performance": {
+      "title": "How we measure performance",
+      "text": "Every script is measured with <span class=\"mono-inline\">resmon 1</span> on a clean server: first idle, with the resource loaded and nothing on screen, then in the worst case expected in production. Both figures are published, never an average. If it goes over 0.05 ms idle, it does not go on sale.",
+      "note": "Measured on {hardware} with FiveM build {build}. The full table for each script is on its listing."
+    },
+    "scripts": {
+      "title": "Installation and usage",
+      "text": "Every script with its install steps, its API and its requirements. The same text you get on each listing, gathered on a single page."
+    },
+    "script": {
+      "install": "Installation",
+      "api": "Exports and events",
+      "requirements": "Requirements",
+      "product": "View the script listing",
+      "buy": "Buy on Tebex",
+      "beta": "In closed beta and not on sale yet. Join the Discord to test it.",
+      "manual": "Full manual",
+      "manualNav": "In this manual"
+    },
+    "changelog": {
+      "title": "Version history",
+      "text": "Every version with its date and what changed. Updates come from the same download link as your Tebex purchase, which always serves the latest one.",
+      "columns": {
+        "changes": "changes",
+        "version": "version",
+        "date": "date"
+      }
+    },
+    "legal": {
+      "title": "Licence and terms",
+      "items": [
+        {
+          "id": "license",
+          "title": "Licence terms",
+          "text": "Every purchase includes a licence for one production server. You get the complete code, no escrow and unobfuscated: you can edit the config, the text and the logic to fit your server. Reselling, redistributing or publishing the code is not allowed, in whole or in part. For networks with several IPs, arrange it on Discord."
+        },
+        {
+          "id": "terms",
+          "title": "Terms",
+          "text": "The sale, the payment and the invoice are handled by Tebex from the store, so buying also means accepting their terms. Delivery is automatic once payment clears and updates come from the same purchase link, at no extra cost."
+        },
+        {
+          "id": "privacy",
+          "title": "Privacy",
+          "text": "This site is static: no accounts, no forms, no analytics and no cookies of our own. Fonts are loaded from Google Fonts, which sees your IP when serving them. Payment data is handled by Tebex and support happens on Discord: nothing about you is stored here."
+        },
+        {
+          "id": "refunds",
+          "title": "Refunds",
+          "text": "Refunds are handled through Tebex under [your refund policy]. As a digital product that ships with its code, the usual answer is no refund unless the script does not work and cannot be fixed; message on Discord before opening a request."
+        }
+      ]
+    },
+    "support": {
+      "title": "Support",
+      "text": "Support happens entirely on Discord: pre-sales, installation and bugs. No email tickets, no separate forum, and questions get answered before you buy too.",
+      "discord": "Open Discord",
+      "store": "Visit the Tebex store"
+    }
+  },
   "product": {
     "breadcrumb": "Catalog",
     "mediaPlaceholder": "[in-game screenshot · 1600 × 900]",
@@ -282,7 +351,8 @@
     "api": {
       "title": "Main exports",
       "file": "server.lua",
-      "note": "All {exports} exports and {events} events are documented with their parameters and return values in the documentation."
+      "note": "All {exports} exports and {events} events are documented with their parameters and return values in the documentation on this site.",
+      "manualCta": "Read the full manual"
     },
     "install": {
       "title": "Installation",
@@ -301,8 +371,8 @@
     },
     "changelog": {
       "title": "Changelog",
-      "note": "The full history, version by version, lives in the documentation.",
-      "cta": "Read the changelog"
+      "note": "The full history, version by version, lives in the documentation on this site.",
+      "cta": "See the version history"
     },
     "aside": {
       "packageLabel": "Tebex package",
@@ -351,8 +421,8 @@
             "type": "bundle"
           },
           {
-            "label": "Changelog",
-            "type": "changelog"
+            "label": "Tebex store",
+            "type": "store"
           }
         ]
       },
@@ -365,7 +435,13 @@
           },
           {
             "label": "Install guide",
-            "type": "docs"
+            "type": "docs",
+            "anchor": "install"
+          },
+          {
+            "label": "Version history",
+            "type": "docs",
+            "anchor": "changelog"
           },
           {
             "label": "Discord",
@@ -378,15 +454,18 @@
         "items": [
           {
             "label": "Licence terms",
-            "type": "docs"
+            "type": "docs",
+            "anchor": "license"
           },
           {
             "label": "Terms",
-            "type": "docs"
+            "type": "docs",
+            "anchor": "terms"
           },
           {
             "label": "Privacy",
-            "type": "docs"
+            "type": "docs",
+            "anchor": "privacy"
           }
         ]
       }

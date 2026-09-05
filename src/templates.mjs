@@ -42,6 +42,68 @@ export const icon = {
 
 const featureIcons = [icon.bolt, icon.code, icon.book, icon.refresh];
 
+/* Un script puede traer su historial en scripts.json; si no, se usa su versión actual. */
+export const changelogOf = (s) =>
+  (Array.isArray(s.changelog) && s.changelog.length
+    ? s.changelog
+    : [{ version: s.version, date: s.updated }]);
+
+/* ---------- manual largo de un script (content/manuals/<slug>.json) ---------- */
+
+/* Los textos del manual llevan HTML propio (<code>, <strong>, enlaces): se
+   escriben tal cual. Solo se escapa lo que es literal: código y tablas. */
+const manualBlock = (b) => {
+  switch (b.type) {
+    case 'p':
+      return `<p class="body">${b.html}</p>`;
+    case 'note':
+      return `<p class="small">${b.html}</p>`;
+    case 'ul':
+      return `<ul class="dot-list">${b.items.map((i) => `<li>${i}</li>`).join('')}</ul>`;
+    case 'ol':
+      return `<ol class="steps">${b.items.map((i) => `<li><span>${i}</span></li>`).join('')}</ol>`;
+    case 'h':
+      return `<h5 class="manual__sub${b.mono ? ' mono' : ''}">${esc(b.text)}</h5>`;
+    case 'code':
+      return `<div class="code">${b.head ? `<p class="code__head">${esc(b.head)}</p>` : ''}<pre><code>${esc(b.code)}</code></pre></div>`;
+    case 'table':
+      return `
+        <div class="doc-table">
+          <table>
+            <thead><tr>${b.columns.map((c) => `<th>${esc(c)}</th>`).join('')}</tr></thead>
+            <tbody>${b.rows.map((r) => `
+              <tr>${r.map((cell, i) => `<td>${i === 0 ? `<code>${esc(cell)}</code>` : cell}</td>`).join('')}</tr>`).join('')}
+            </tbody>
+          </table>
+        </div>`;
+    default:
+      return '';
+  }
+};
+
+/* Devuelve '' si el script no trae manual en este idioma. */
+const manualOf = (s, lang) => ((s.manual || {})[lang] || {}).sections || [];
+
+const manualSections = (s, lang, d) => {
+  const sections = manualOf(s, lang);
+  if (!sections.length) return '';
+  const anchorOf = (sec) => `${s.slug}-${sec.id}`;
+  return `
+        <div class="docs__block">
+          <span class="label">${esc(d.script.manual)}</span>
+          <nav class="manual__nav" aria-label="${esc(d.script.manualNav)}">
+            ${sections.map((sec) => `<a href="#${esc(anchorOf(sec))}">${esc(sec.title)}</a>`).join('')}
+          </nav>
+          <div class="manual">
+            ${sections.map((sec) => `
+            <section class="manual__section" id="${esc(anchorOf(sec))}">
+              <h4 class="manual__title">${esc(sec.title)}</h4>
+              ${sec.blocks.map(manualBlock).join('')}
+            </section>`).join('')}
+          </div>
+        </div>`;
+};
+
 /* ---------- piezas compartidas ---------- */
 
 const brand = (site, big = false) => `
@@ -63,8 +125,8 @@ const topbar = (ctx, current) => {
         <a href="${url.home}" aria-label="${esc(site.brand.fullName)}">${brand(site)}</a>
         <nav class="nav" aria-label="${esc(t.nav.catalog)}">
           <a href="${url.catalog}"${current === 'catalog' ? ' aria-current="page"' : ''}>${esc(t.nav.catalog)}</a>
-          <a href="${esc(site.links.docs)}" rel="noopener">${esc(t.nav.docs)}</a>
-          <a href="${esc(site.links.changelog)}" rel="noopener">${esc(t.nav.changelog)}</a>
+          <a href="${url.docs}"${current === 'docs' ? ' aria-current="page"' : ''}>${esc(t.nav.docs)}</a>
+          <a href="${url.docs}#changelog">${esc(t.nav.changelog)}</a>
           <a href="${esc(site.links.discord)}" rel="noopener">${esc(t.nav.support)}</a>
         </nav>
       </div>
@@ -73,7 +135,7 @@ const topbar = (ctx, current) => {
           ${ctx.langs.map((l) => `<a href="${l.code === lang ? url.self : altUrl}" hreflang="${l.code}"${l.code === lang ? ' aria-current="true"' : ''}>${esc(l.short)}</a>`).join('')}
         </div>
         <a class="btn btn--ghost btn--sm" href="${esc(site.links.discord)}" rel="noopener">${icon.chat()} ${esc(t.nav.discord)}</a>
-        <a class="btn btn--primary btn--sm" href="${esc(site.links.tebexOrders)}" rel="noopener">${esc(t.nav.orders)}</a>
+        <a class="btn btn--primary btn--sm" href="${esc(site.links.tebexStore)}" rel="noopener">${esc(t.nav.store)} ${icon.external(13)}</a>
       </div>
     </div>
   </header>`;
@@ -81,13 +143,14 @@ const topbar = (ctx, current) => {
 
 const footer = (ctx) => {
   const { site, t, url, vars } = ctx;
-  const href = (type) => ({
+  /* Solo hay tres destinos: la propia web, la tienda de Tebex y el Discord. */
+  const href = (item) => ({
     catalog: url.catalog,
+    docs: item.anchor ? `${url.docs}#${item.anchor}` : url.docs,
     bundle: site.links.tebexBundle,
-    changelog: site.links.changelog,
-    docs: site.links.docs,
+    store: site.links.tebexStore,
     discord: site.links.discord,
-  }[type] || '#');
+  }[item.type] || url.home);
 
   return `
   <footer class="footer">
@@ -100,7 +163,7 @@ const footer = (ctx) => {
         ${t.footer.columns.map((col) => `
         <div class="footer__col">
           <span class="label">${esc(col.title)}</span>
-          ${col.items.filter((it) => it.type !== 'bundle' || ctx.hasBundle).map((it) => `<a href="${esc(href(it.type))}" rel="noopener">${esc(it.label)}</a>`).join('')}
+          ${col.items.filter((it) => it.type !== 'bundle' || ctx.hasBundle).map((it) => `<a href="${esc(href(it))}" rel="noopener">${esc(it.label)}</a>`).join('')}
         </div>`).join('')}
       </div>
       <div class="footer__bottom">
@@ -166,7 +229,7 @@ export const renderHome = (ctx) => {
         <p class="lead">${h.hero.subtitle}</p>
         <div class="hero__actions">
           <a class="btn btn--primary" href="${url.catalog}">${esc(h.hero.ctaPrimary)} ${icon.arrow()}</a>
-          <a class="btn btn--ghost" href="${esc(site.links.docs)}" rel="noopener">${esc(h.hero.ctaSecondary)}</a>
+          <a class="btn btn--ghost" href="${url.docs}#performance">${esc(h.hero.ctaSecondary)}</a>
         </div>
         <p class="hero__badges">${h.hero.badges.map(esc).join('<span class="sep">/</span>')}</p>
       </div>
@@ -504,16 +567,18 @@ export const renderProduct = (ctx, s) => {
               <pre><code>${esc(s.code)}</code></pre>
             </div>
             <p class="small">${esc(tpl(p.api.note, pVars))}</p>
+            <a class="btn btn--ghost btn--md" href="${url.docs}#${esc(s.slug)}" style="align-self:flex-start">${esc(p.api.manualCta)} ${icon.arrow(15)}</a>
           </div>
 
           <div class="tabs__panel" id="panel-changelog" role="tabpanel" aria-labelledby="tab-changelog">
             <h2 class="h3">${esc(p.changelog.title)}</h2>
             <div class="data-table">
               <div class="data-table__head"><span>${esc(p.tabs.changelog)}</span><span>${esc(t.product.aside.spec.version)}</span><span>${esc(t.product.aside.spec.updated)}</span></div>
-              <div class="data-table__row"><span>${esc(s.name)}</span><b>${esc(s.version)}</b><b>${esc(date(s.updated, lang))}</b></div>
+              ${changelogOf(s).map((e) => `
+              <div class="data-table__row"><span>${esc(e[lang] || s.name)}</span><b>${esc(e.version)}</b><b>${esc(date(e.date, lang))}</b></div>`).join('')}
             </div>
             <p class="small">${esc(p.changelog.note)}</p>
-            <a class="btn btn--ghost btn--md" href="${esc(site.links.changelog)}" rel="noopener" style="align-self:flex-start">${esc(p.changelog.cta)} ${icon.external()}</a>
+            <a class="btn btn--ghost btn--md" href="${url.docs}#changelog" style="align-self:flex-start">${esc(p.changelog.cta)} ${icon.arrow(15)}</a>
           </div>
 
           <div class="tabs__panel" id="panel-requirements" role="tabpanel" aria-labelledby="tab-requirements">
@@ -556,7 +621,7 @@ export const renderProduct = (ctx, s) => {
               ? `<p class="notice">${esc(p.betaNotice)}</p>
                  <a class="btn btn--ghost btn--block" href="${esc(site.links.discord)}" rel="noopener">${icon.chat(16)} ${esc(p.aside.supportCta)}</a>`
               : `<a class="btn btn--primary btn--block" style="min-height:48px" href="${esc(s.tebex)}" rel="noopener">${esc(p.aside.buy)} ${icon.external()}</a>
-                 <a class="btn btn--ghost btn--md btn--block" href="${esc(site.links.docs)}" rel="noopener">${esc(p.aside.docs)}</a>
+                 <a class="btn btn--ghost btn--md btn--block" href="${url.docs}#${esc(s.slug)}">${esc(p.aside.docs)}</a>
                  <p class="buybox__note">${esc(p.aside.checkoutNote)}</p>`}
           </div>
           <ul class="buybox__includes">
@@ -602,6 +667,158 @@ export const renderProduct = (ctx, s) => {
     current: 'catalog',
     body,
     script: '<script src="/assets/product.js" defer></script>',
+  });
+};
+
+/* ---------- documentación ---------- */
+
+export const renderDocs = (ctx) => {
+  const { site, t, url, vars, scripts, lang } = ctx;
+  const d = t.docs;
+
+  const toc = [
+    { id: 'performance', label: d.performance.title },
+    { id: 'install', label: d.scripts.title },
+    ...scripts.map((s) => ({ id: s.slug, label: s.name, sub: true })),
+    { id: 'changelog', label: d.changelog.title },
+    { id: 'license', label: d.legal.title },
+    { id: 'support', label: d.support.title },
+  ];
+
+  const scriptBlock = (s) => {
+    const loc = s[lang];
+    const isBeta = s.status === 'beta';
+    const sVars = { ...vars, name: s.name, exports: s.apiNote.exports, events: s.apiNote.events };
+    return `
+      <article class="docs__section" id="${esc(s.slug)}">
+        <div class="docs__head">
+          <h3>${esc(s.name)}</h3>
+          <span class="chip chip--accent">v${esc(s.version)}</span>
+          ${s.frameworks.map((f) => `<span class="chip">${esc(f)}</span>`).join('')}
+          ${isBeta ? `<span class="chip">${esc(t.statuses.beta)}</span>` : ''}
+        </div>
+        <p class="body">${esc(loc.tagline)}</p>
+
+        <div class="docs__block">
+          <span class="label">${esc(d.script.install)}</span>
+          <ol class="steps">${(loc.installSteps || t.product.install.steps).map((st) => `<li><span>${tpl(st, sVars)}</span></li>`).join('')}</ol>
+        </div>
+
+        <div class="docs__block">
+          <span class="label">${esc(d.script.api)}</span>
+          <div class="code">
+            <p class="code__head">${esc(t.product.api.file)}</p>
+            <pre><code>${esc(s.code)}</code></pre>
+          </div>
+          <p class="small">${esc(tpl(t.product.api.note, sVars))}</p>
+        </div>
+
+        <div class="docs__block">
+          <span class="label">${esc(d.script.requirements)}</span>
+          <ul class="check-list">
+            <li>${icon.check()}<span>${esc(t.product.aside.spec.frameworks)}: ${esc(s.frameworks.join(' · '))}</span></li>
+            <li>${icon.check()}<span>${esc(t.product.aside.spec.dependencies)}: ${esc(s.dependencies.length ? s.dependencies.join(' · ') : t.product.aside.spec.none)}</span></li>
+            <li>${icon.check()}<span>${esc(t.product.aside.spec.locales)}: ${esc(s.locales.join(' · '))}</span></li>
+          </ul>
+          <p class="small">${esc(t.product.requirements.buildNote)}</p>
+        </div>
+
+        ${manualSections(s, lang, d)}
+
+        <div class="docs__actions">
+          <a class="btn btn--ghost btn--md" href="${url.product(s.slug)}">${esc(d.script.product)} ${icon.arrow(15)}</a>
+          ${isBeta
+            ? `<p class="small">${esc(d.script.beta)}</p>`
+            : `<a class="btn btn--primary btn--md" href="${esc(s.tebex)}" rel="noopener">${esc(d.script.buy)} ${icon.external()}</a>`}
+        </div>
+      </article>`;
+  };
+
+  const body = `
+  <section class="page-head">
+    <div class="wrap page-head__inner">
+      <div class="page-head__copy">
+        <p class="label">${esc(d.breadcrumb)}</p>
+        <h1 class="h1">${esc(d.title)}</h1>
+        <p class="body">${esc(d.subtitle)}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="docs">
+    <div class="wrap docs__layout">
+      <aside class="docs__toc" aria-label="${esc(d.tocTitle)}">
+        <span class="label">${esc(d.tocTitle)}</span>
+        <nav class="docs__toc-list">
+          ${toc.map((i) => `<a href="#${esc(i.id)}"${i.sub ? ' class="docs__toc-sub"' : ''}>${esc(i.label)}</a>`).join('')}
+        </nav>
+      </aside>
+
+      <div class="docs__body">
+        <article class="docs__section" id="performance">
+          <h2 class="h2">${esc(d.performance.title)}</h2>
+          <p class="body">${d.performance.text}</p>
+          <div class="data-table">
+            <div class="data-table__head">
+              <span>${esc(t.home.resmon.columns.resource)}</span><span>${esc(t.home.resmon.columns.cpu)}</span><span>${esc(t.home.resmon.columns.memory)}</span>
+            </div>
+            ${scripts.map((s) => `
+            <div class="data-table__row"><span>${esc(s.name)}</span><b class="good">${esc(s.idle)}</b><b>${esc(s.performance[0] ? s.performance[0].memory : '—')}</b></div>`).join('')}
+          </div>
+          <p class="small">${esc(tpl(d.performance.note, vars))}</p>
+        </article>
+
+        <article class="docs__section" id="install">
+          <h2 class="h2">${esc(d.scripts.title)}</h2>
+          <p class="body">${esc(d.scripts.text)}</p>
+        </article>
+
+        ${scripts.map(scriptBlock).join('')}
+
+        <article class="docs__section" id="changelog">
+          <h2 class="h2">${esc(d.changelog.title)}</h2>
+          <p class="body">${esc(d.changelog.text)}</p>
+          ${scripts.map((s) => `
+          <div class="docs__block">
+            <span class="label">${esc(s.name)}</span>
+            <div class="data-table">
+              <div class="data-table__head">
+                <span>${esc(d.changelog.columns.changes)}</span><span>${esc(d.changelog.columns.version)}</span><span>${esc(d.changelog.columns.date)}</span>
+              </div>
+              ${changelogOf(s).map((e) => `
+              <div class="data-table__row"><span>${esc(e[lang] || s.name)}</span><b>${esc(e.version)}</b><b>${esc(date(e.date, lang))}</b></div>`).join('')}
+            </div>
+          </div>`).join('')}
+        </article>
+
+        <article class="docs__section" id="license">
+          <h2 class="h2">${esc(d.legal.title)}</h2>
+          <div>
+            ${d.legal.items.map((i) => `
+            <article class="faq__item" id="${esc(i.id)}">
+              <h3>${esc(i.title)}</h3>
+              <p>${esc(i.text)}</p>
+            </article>`).join('')}
+          </div>
+        </article>
+
+        <article class="docs__section" id="support">
+          <h2 class="h2">${esc(d.support.title)}</h2>
+          <p class="body">${esc(d.support.text)}</p>
+          <div class="docs__actions">
+            <a class="btn btn--primary btn--md" href="${esc(site.links.discord)}" rel="noopener">${icon.chat(15)} ${esc(d.support.discord)}</a>
+            <a class="btn btn--ghost btn--md" href="${esc(site.links.tebexStore)}" rel="noopener">${esc(d.support.store)} ${icon.external()}</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>`;
+
+  return layout(ctx, {
+    title: tpl(t.meta.docs.title, vars),
+    description: tpl(t.meta.docs.description, vars),
+    current: 'docs',
+    body,
   });
 };
 

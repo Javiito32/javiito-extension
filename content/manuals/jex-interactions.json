@@ -1,0 +1,1257 @@
+{
+  "slug": "jex-interactions",
+  "es": {
+    "sections": [
+      {
+        "id": "setup",
+        "title": "Requisitos y orden de arranque",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "<code>jex_interactions</code> es un HUD de avisos de interacción independiente. No necesita framework, ni <code>ox_lib</code>, ni ninguna otra dependencia. Las integraciones opcionales con ox_lib TextUI y con QBX DrawText3D están más abajo."
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Un servidor de FiveM.",
+              "La carpeta del recurso tiene que llamarse exactamente <code>jex_interactions</code>.",
+              "Cualquier recurso que use sus exports debe arrancar después de <code>jex_interactions</code>."
+            ]
+          },
+          {
+            "type": "p",
+            "html": "El paquete que descargas ya trae la interfaz compilada: no hacen falta Node.js, npm ni ningún paso de build."
+          },
+          {
+            "type": "code",
+            "head": "server.cfg",
+            "code": "ensure jex_interactions\nensure my_resource"
+          },
+          {
+            "type": "note",
+            "html": "Reinicia el servidor después de instalar el recurso o de cambiar su configuración."
+          }
+        ]
+      },
+      {
+        "id": "config",
+        "title": "Configuración",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "Todos los ajustes están en <code>config.lua</code>."
+          },
+          {
+            "type": "table",
+            "columns": [
+              "Ajuste",
+              "Por defecto",
+              "Qué hace"
+            ],
+            "rows": [
+              [
+                "Config.Position",
+                "'orbit'",
+                "Posición del HUD: <code>orbit</code>, <code>top-right</code>, <code>top-left</code>, <code>bottom-right</code>, <code>bottom-left</code> y <code>bottom-center</code>. El valor antiguo <code>player</code> se acepta como alias de <code>orbit</code>."
+              ],
+              [
+                "Config.Offset",
+                "{ X = 64, Y = -14 }",
+                "Desplazamiento horizontal y vertical, en píxeles, que usa la posición <code>orbit</code>."
+              ],
+              [
+                "Config.Shape",
+                "'round'",
+                "Estilo del aviso y de la tecla: <code>round</code> o <code>square</code>."
+              ],
+              [
+                "Config.OuterRing",
+                "true",
+                "Muestra el marco exterior. Ponlo en <code>false</code> para dejar solo la tecla y el texto."
+              ],
+              [
+                "Config.MaxVisible",
+                "3",
+                "Cuántos avisos se ven a la vez. Los de más prioridad se muestran primero."
+              ],
+              [
+                "Config.DefaultKey",
+                "'E'",
+                "Tecla que se muestra cuando un aviso no trae <code>key</code>."
+              ],
+              [
+                "Config.Accent",
+                "'#2f6bff'",
+                "Color principal de los avisos normales, en hexadecimal."
+              ],
+              [
+                "Config.Warn",
+                "'#f5b301'",
+                "Color de los avisos con estado <code>warn</code>."
+              ],
+              [
+                "Config.Danger",
+                "'#ff3b30'",
+                "Color de los avisos con estado <code>bad</code>."
+              ],
+              [
+                "Config.MaxDuration",
+                "30000",
+                "Duración máxima aceptada, en milisegundos. <code>0</code> quita el límite."
+              ],
+              [
+                "Config.InterceptTextUI",
+                "true",
+                "Activa el receptor que usa la integración opcional con ox_lib TextUI."
+              ],
+              [
+                "Config.InterceptDrawText3D",
+                "true",
+                "Activa el receptor que usa la integración opcional con QBX DrawText3D."
+              ]
+            ]
+          },
+          {
+            "type": "note",
+            "html": "<code>Config.InterceptTextUI</code> y <code>Config.InterceptDrawText3D</code> no modifican otros recursos por su cuenta: hay que aplicar el bloque de compatibilidad de cada integración."
+          }
+        ]
+      },
+      {
+        "id": "exports",
+        "title": "Exports de cliente",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "Todos los exports principales son de cliente: llámalos desde un script de cliente, nunca desde el servidor."
+          },
+          {
+            "type": "h",
+            "text": "show(data)",
+            "mono": true
+          },
+          {
+            "type": "p",
+            "html": "Crea un aviso. Si el recurso que llama ya tiene uno con ese <code>id</code>, se sustituye por los datos nuevos en vez de duplicarse."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "local handle = exports.jex_interactions:show({\n    id       = 'vehicle_storage',\n    key      = 'E',\n    label    = 'Store vehicle',\n    hint     = 'Backspace to cancel',\n    state    = 'ok',\n    priority = 10,\n    duration = 2500,\n})"
+          },
+          {
+            "type": "p",
+            "html": "Devuelve el handle completo del aviso, o <code>nil</code> si los datos no son válidos."
+          },
+          {
+            "type": "table",
+            "columns": [
+              "Campo",
+              "Tipo",
+              "Obligatorio",
+              "Qué es"
+            ],
+            "rows": [
+              [
+                "label",
+                "string · number",
+                "Sí",
+                "Texto principal del aviso. <code>text</code> y <code>title</code> valen como alias."
+              ],
+              [
+                "id",
+                "string · number",
+                "No",
+                "Identificador estable para actualizarlo o quitarlo luego. Si no lo pones, se asigna uno único."
+              ],
+              [
+                "key",
+                "string · number",
+                "No",
+                "Tecla que muestra el HUD. Por defecto, <code>Config.DefaultKey</code>. Es solo una etiqueta: no registra ni escucha el control."
+              ],
+              [
+                "hint",
+                "string · number",
+                "No",
+                "Texto secundario, opcional."
+              ],
+              [
+                "state",
+                "string",
+                "No",
+                "Estado visual: <code>ok</code>, <code>warn</code> o <code>bad</code>. Si falta o no es válido, se usa <code>ok</code>."
+              ],
+              [
+                "priority",
+                "number",
+                "No",
+                "Prioridad de aparición: los valores altos van antes. Por defecto, <code>0</code>."
+              ],
+              [
+                "duration",
+                "number",
+                "No",
+                "Duración en milisegundos. Un valor positivo lo retira solo. Sin él, o con <code>0</code>, el aviso es permanente."
+              ]
+            ]
+          },
+          {
+            "type": "p",
+            "html": "Los límites de entrada son 48 bytes para <code>id</code>, 8 para <code>key</code> y 96 para <code>label</code> y <code>hint</code>. Donde se espera texto, no vale un valor vacío."
+          },
+          {
+            "type": "p",
+            "html": "Si creas un aviso sin <code>id</code> propio, guarda el handle que devuelve:"
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "local handle = exports.jex_interactions:show({\n    key      = 'G',\n    label    = 'Maletero abierto',\n    duration = 2000,\n})\n\nif handle then\n    -- El mismo handle vale para has, update o hide.\nend"
+          },
+          {
+            "type": "h",
+            "text": "update(ref, patch)",
+            "mono": true
+          },
+          {
+            "type": "p",
+            "html": "Cambia solo los campos que le pases de un aviso que ya existe. Devuelve <code>true</code> si lo encontró y lo actualizó, y <code>false</code> si no. Nunca crea uno que falte."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "local updated = exports.jex_interactions:update('vehicle_storage', {\n    label    = 'Aqui no puedes guardar el vehiculo',\n    state    = 'bad',\n    priority = 20,\n})"
+          },
+          {
+            "type": "p",
+            "html": "Lo que no venga en <code>patch</code> se queda como estaba. Los alias <code>text</code> y <code>title</code> también actualizan el texto principal. Para quitar el texto secundario, pasa <code>hint = false</code>:"
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "exports.jex_interactions:update('vehicle_storage', { hint = false })"
+          },
+          {
+            "type": "p",
+            "html": "Si actualizas un aviso con duración y no incluyes <code>duration</code>, conserva la hora de caducidad que tenía. Pon <code>duration = 0</code> para hacerlo permanente, o una duración nueva para reiniciar la cuenta."
+          },
+          {
+            "type": "h",
+            "text": "hide(ref)",
+            "mono": true
+          },
+          {
+            "type": "p",
+            "html": "Quita un aviso del recurso que llama. Devuelve <code>true</code> si existía."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "exports.jex_interactions:hide('vehicle_storage')"
+          },
+          {
+            "type": "h",
+            "text": "hideAll()",
+            "mono": true
+          },
+          {
+            "type": "p",
+            "html": "Quita todos los avisos del recurso que llama y devuelve cuántos ha quitado. Los de otros recursos no se tocan."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "local removed = exports.jex_interactions:hideAll()"
+          },
+          {
+            "type": "h",
+            "text": "has(ref)",
+            "mono": true
+          },
+          {
+            "type": "p",
+            "html": "Dice si el aviso referenciado está registrado ahora mismo."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "if exports.jex_interactions:has('vehicle_storage') then\n    exports.jex_interactions:update('vehicle_storage', { state = 'warn' })\nend"
+          },
+          {
+            "type": "h",
+            "text": "active()",
+            "mono": true
+          },
+          {
+            "type": "p",
+            "html": "Devuelve la lista de handles completos visibles, en orden de aparición. Como mucho trae <code>Config.MaxVisible</code> elementos."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "local handles = exports.jex_interactions:active()\n\nfor index, handle in ipairs(handles) do\n    print(index, handle)\nend"
+          },
+          {
+            "type": "h",
+            "text": "Referencias y propiedad"
+          },
+          {
+            "type": "p",
+            "html": "<code>update</code>, <code>hide</code> y <code>has</code> aceptan las dos formas:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "El id corto que le pusiste tú, por ejemplo <code>vehicle_storage</code>.",
+              "El handle completo que devolvió <code>show</code>, por ejemplo <code>my_garage:vehicle_storage</code>."
+            ]
+          },
+          {
+            "type": "p",
+            "html": "Los ids son propios de cada recurso, así que dos recursos distintos pueden usar el mismo id corto sin pisarse. En uso normal, cada recurso gestiona solo sus avisos y le basta con ids cortos."
+          },
+          {
+            "type": "note",
+            "html": "Cuando un recurso de cliente se detiene, sus avisos se eliminan solos. Aun así, llama a <code>hide</code> en cuanto la interacción deje de estar disponible para que el HUD se actualice al momento."
+          }
+        ]
+      },
+      {
+        "id": "patterns",
+        "title": "Patrones de uso",
+        "blocks": [
+          {
+            "type": "h",
+            "text": "Mostrar un aviso mientras el jugador está en una zona"
+          },
+          {
+            "type": "p",
+            "html": "Llama a <code>show</code> una vez al entrar y a <code>hide</code> una vez al salir. No llames a <code>show</code> en cada frame."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "CreateThread(function()\n    local promptVisible = false\n    local location = vector3(-1037.0, -2737.0, 20.2)\n\n    while true do\n        local playerCoords = GetEntityCoords(PlayerPedId())\n        local nearby = #(playerCoords - location) < 2.0\n\n        if nearby and not promptVisible then\n            exports.jex_interactions:show({\n                id    = 'atm',\n                key   = 'E',\n                label = 'Usar cajero',\n            })\n            promptVisible = true\n        elseif not nearby and promptVisible then\n            exports.jex_interactions:hide('atm')\n            promptVisible = false\n        end\n\n        Wait(250)\n    end\nend)"
+          },
+          {
+            "type": "p",
+            "html": "Mostrar una tecla no gestiona su pulsación: la lógica de la interacción sigue siendo de tu recurso."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "if promptVisible and IsControlJustReleased(0, 38) then -- INPUT_CONTEXT / E\n    TriggerEvent('my_resource:openMenu')\nend"
+          },
+          {
+            "type": "h",
+            "text": "Varias acciones con prioridad"
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "exports.jex_interactions:show({\n    id       = 'primary_action',\n    key      = 'E',\n    label    = 'Abrir',\n    priority = 100,\n})\n\nexports.jex_interactions:show({\n    id       = 'secondary_action',\n    key      = 'G',\n    label    = 'Inspeccionar',\n    priority = 50,\n})"
+          },
+          {
+            "type": "p",
+            "html": "Si hay más avisos que <code>Config.MaxVisible</code>, los de menos prioridad esperan a que quede sitio."
+          },
+          {
+            "type": "h",
+            "text": "Declarar la dependencia en el manifest"
+          },
+          {
+            "type": "p",
+            "html": "No hace falta si el orden de arranque ya está garantizado en <code>server.cfg</code>. Si prefieres que tu recurso no arranque sin el HUD, decláralo:"
+          },
+          {
+            "type": "code",
+            "head": "fxmanifest.lua",
+            "code": "dependency 'jex_interactions'\n\nclient_script 'client.lua'"
+          }
+        ]
+      },
+      {
+        "id": "events",
+        "title": "API de eventos",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "Hay eventos de cliente para integraciones que no pueden llamar a exports. Siempre que puedas, usa los exports: asignan la propiedad del aviso automáticamente."
+          },
+          {
+            "type": "p",
+            "html": "Los eventos no pueden saber con seguridad quién los dispara, así que pasa un <code>owner</code> estable al mostrar y al ocultar."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "TriggerEvent('jex_interactions:show', {\n    owner    = 'my_resource',\n    id       = 'interaction',\n    key      = 'E',\n    label    = 'Interactuar',\n    priority = 10,\n})\n\nTriggerEvent('jex_interactions:hide', 'interaction', 'my_resource')"
+          },
+          {
+            "type": "p",
+            "html": "Sin <code>owner</code>, el aviso pasa al propietario compartido <code>external</code>. Evita repetir el mismo <code>id</code> bajo ese propietario desde recursos que no tienen nada que ver."
+          },
+          {
+            "type": "note",
+            "html": "La API de eventos solo cubre mostrar y ocultar. Para actualizar, comprobar si existe, limpiar por recurso, leer valores de retorno o listar los avisos activos, usa los exports."
+          }
+        ]
+      },
+      {
+        "id": "oxlib",
+        "title": "Integración opcional con ox_lib TextUI",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "Esta integración redirige al HUD las interacciones de una sola tecla E que pasan por <code>lib.showTextUI</code>. Lo que no encaje sigue mostrándose con el TextUI de ox_lib."
+          },
+          {
+            "type": "note",
+            "html": "Probada con ox_lib 3.39.0. Otra versión puede organizar el archivo de otra forma: busca las funciones por su nombre, no por el número de línea. Haz copia o commit antes de tocarlo, porque una actualización de ox_lib puede sobrescribir el cambio."
+          },
+          {
+            "type": "code",
+            "head": "server.cfg",
+            "code": "ensure ox_lib\nensure jex_interactions\n\n# Los recursos que llamen a lib.showTextUI van por debajo de esta linea.\nensure my_resource"
+          },
+          {
+            "type": "code",
+            "head": "jex_interactions/config.lua",
+            "code": "Config.InterceptTextUI = true"
+          },
+          {
+            "type": "p",
+            "html": "Abre <code>ox_lib/resource/interface/client/textui.lua</code>. Conserva sus anotaciones de tipos y sustituye el estado del TextUI y las implementaciones de <code>lib.showTextUI</code>, <code>lib.hideTextUI</code> y <code>lib.isTextUIOpen</code> por este bloque:"
+          },
+          {
+            "type": "code",
+            "head": "ox_lib/resource/interface/client/textui.lua",
+            "code": "local isOpen = false\nlocal currentText\nlocal usingHud = false\nlocal HUD = 'jex_interactions'\n\nlocal function hideNative()\n    if not isOpen then return end\n    SendNUIMessage({ action = 'textUiHide' })\n    isOpen = false\nend\n\nlocal function releaseHud()\n    if GetResourceState(HUD) == 'started' then\n        pcall(function()\n            exports[HUD]:releaseTextUI()\n        end)\n    end\n    usingHud = false\nend\n\n---@param text string\n---@param options? TextUIOptions\nfunction lib.showTextUI(text, options)\n    if currentText == text then return end\n\n    currentText = text\n    usingHud = false\n\n    if GetResourceState(HUD) == 'started' then\n        local ok, taken = pcall(function()\n            return exports[HUD]:consumeTextUI(text)\n        end)\n        if ok and taken then\n            hideNative()\n            usingHud = true\n            return\n        end\n    end\n\n    if not options then options = {} end\n    options.text = text\n\n    SendNUIMessage({\n        action = 'textUi',\n        data = options\n    })\n    isOpen = true\nend\n\nfunction lib.hideTextUI()\n    releaseHud()\n    hideNative()\n    currentText = nil\nend\n\n---@return boolean, string | nil\nfunction lib.isTextUIOpen()\n    return (isOpen or usingHud), currentText\nend\n\nAddEventHandler('onClientResourceStop', function(resource)\n    if resource ~= HUD or not usingHud then return end\n    usingHud = false\n    local text = currentText\n    currentText = nil\n    if text then lib.showTextUI(text) end\nend)"
+          },
+          {
+            "type": "p",
+            "html": "Reinicia el servidor entero después de editar ox_lib. Con la intercepción desactivada, con el HUD parado o con un aviso no compatible, ox_lib sigue mostrando su TextUI de siempre con sus opciones."
+          },
+          {
+            "type": "note",
+            "html": "Los recursos que usan ox_lib tienen que seguir emparejando cada <code>lib.showTextUI(...)</code> con su <code>lib.hideTextUI()</code> al terminar la interacción."
+          }
+        ]
+      },
+      {
+        "id": "qbx",
+        "title": "Integración opcional con QBX DrawText3D",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "Esta integración redirige los avisos de tecla E compatibles que pasan por <code>qbx.drawText3d(params)</code> y deja en 3D el texto que no lo sea."
+          },
+          {
+            "type": "note",
+            "html": "Probada con qbx_core 1.23.0. Haz copia o commit antes de tocar el archivo: una actualización de qbx_core puede sobrescribir el cambio."
+          },
+          {
+            "type": "code",
+            "head": "server.cfg",
+            "code": "ensure qbx_core\nensure jex_interactions\n\n# Los recursos que usen qbx.drawText3d van por debajo de esta linea.\nensure my_resource"
+          },
+          {
+            "type": "code",
+            "head": "jex_interactions/config.lua",
+            "code": "Config.InterceptDrawText3D = true"
+          },
+          {
+            "type": "p",
+            "html": "Abre <code>qbx_core/modules/lib.lua</code>, busca <code>function qbx.drawText3d(params)</code> e inserta este bloque justo después de la declaración. Deja debajo el contenido original de la función como alternativa:"
+          },
+          {
+            "type": "code",
+            "head": "qbx_core/modules/lib.lua",
+            "code": "local text = params.text\n\nlocal mayBeInteraction = text and (\n    text:find('[E]', 1, true)\n    or text:find('E~', 1, true)\n    or text:find('~E~', 1, true)\n    or text:find(' E ', 1, true)\n    or text:find('E -', 1, true)\n)\n\nif mayBeInteraction and GetResourceState('jex_interactions') == 'started' then\n    local ok, taken = pcall(function()\n        return exports.jex_interactions:consumeDrawText3D(text)\n    end)\n    if ok and taken then return end\nend"
+          },
+          {
+            "type": "p",
+            "html": "Reinicia el servidor entero después de editar el módulo: reiniciar solo qbx_core deja al resto de recursos con la versión anterior cargada."
+          },
+          {
+            "type": "note",
+            "html": "Los recursos de QBX deben seguir llamando a <code>qbx.drawText3d</code> mientras la interacción esté disponible. El aviso del HUD desaparece poco después de que dejen de llamarlo."
+          }
+        ]
+      },
+      {
+        "id": "compatibility",
+        "title": "Qué se redirige y cómo comprobarlo",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "Las integraciones con ox_lib y QBX redirigen los avisos de una sola acción con la tecla E, en formatos como estos:"
+          },
+          {
+            "type": "code",
+            "head": "",
+            "code": "[E] Abrir\nE - Abrir\nPulsa [E] para abrir\nPress E to open\n~g~E~w~ - Abrir"
+          },
+          {
+            "type": "p",
+            "html": "Se quedan a propósito en su interfaz original:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "El texto informativo que no lleva una interacción con E.",
+              "Los avisos de ALT y los de ox_target.",
+              "Las ayudas con varias teclas, del estilo <code>BACKSPACE + E + DEL</code>.",
+              "Cualquier texto que no se pueda leer como una acción clara con la tecla E."
+            ]
+          },
+          {
+            "type": "note",
+            "html": "En los recursos que controlas tú, usa directamente <code>show</code>, <code>update</code> y <code>hide</code> antes que cualquiera de los dos puentes de compatibilidad."
+          },
+          {
+            "type": "h",
+            "text": "Comprobación después de instalar un puente"
+          },
+          {
+            "type": "ol",
+            "items": [
+              "Entra en una zona con un aviso compatible, por ejemplo <code>[E] Abrir</code>. Solo debería verse el HUD de <code>jex_interactions</code>.",
+              "Sal de la zona: el aviso tiene que desaparecer.",
+              "Prueba un texto informativo sin tecla E: tiene que quedarse en su interfaz original.",
+              "Prueba un aviso de ALT o de ox_target: tiene que quedarse en su interfaz original.",
+              "Detén <code>jex_interactions</code> con un aviso de ox_lib abierto: debe volver el TextUI nativo.",
+              "Pon la opción de intercepción en <code>false</code>, reinicia el servidor y confirma que se usa la interfaz original."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "troubleshooting",
+        "title": "Si algo no va",
+        "blocks": [
+          {
+            "type": "h",
+            "text": "El export no existe"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Comprueba que la carpeta instalada se llama exactamente <code>jex_interactions</code>.",
+              "Comprueba que <code>ensure jex_interactions</code> va antes que el recurso que lo llama.",
+              "Comprueba que el export se llama desde un script de cliente.",
+              "Mira la consola del cliente por si hay errores al arrancar el recurso."
+            ]
+          },
+          {
+            "type": "h",
+            "text": "Un aviso no aparece"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Asegúrate de que <code>label</code> lleva texto.",
+              "Asegúrate de que el recurso está arrancado y de que la llamada es de cliente.",
+              "Si hay muchos avisos activos, sube su <code>priority</code> o <code>Config.MaxVisible</code>.",
+              "Si usas <code>duration</code>, comprueba que es suficiente y que no la recorta <code>Config.MaxDuration</code>."
+            ]
+          },
+          {
+            "type": "h",
+            "text": "Un aviso se queda en pantalla"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Llama a <code>hide</code> con el mismo id que usaste en <code>show</code> y desde el mismo recurso.",
+              "Si el id se generó solo, pasa el handle completo que devolvió <code>show</code>.",
+              "Con ox_lib, empareja cada apertura con <code>lib.hideTextUI()</code> y comprueba que el bloque de compatibilidad llama a <code>releaseTextUI()</code>.",
+              "Con QBX, comprueba que el recurso deja de llamar a <code>qbx.drawText3d</code> cuando el jugador sale de la zona."
+            ]
+          },
+          {
+            "type": "h",
+            "text": "Se ven el HUD y la interfaz original a la vez"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "En el puente de QBX, confirma que la función hace <code>return</code> cuando el export dice que se ha hecho cargo del aviso.",
+              "En el de ox_lib, confirma que el TextUI nativo se oculta cuando el aviso se acepta.",
+              "Reinicia el servidor entero después de cambiar ox_lib o qbx_core."
+            ]
+          },
+          {
+            "type": "h",
+            "text": "Un aviso compatible de QBX sigue en 3D"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Confirma <code>Config.InterceptDrawText3D = true</code>.",
+              "Confirma que <code>jex_interactions</code> arranca antes que el recurso que usa el módulo de QBX.",
+              "Confirma que el texto usa uno de los formatos de tecla E admitidos.",
+              "Reinicia el servidor entero para que todos los recursos recarguen el módulo modificado."
+            ]
+          },
+          {
+            "type": "h",
+            "text": "Los cambios de configuración no se notan"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Reinicia <code>jex_interactions</code>, o el servidor entero si también tocaste un puente de compatibilidad.",
+              "Confirma que editaste el <code>config.lua</code> de la copia del recurso que está en marcha."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "notes",
+        "title": "Notas de uso",
+        "blocks": [
+          {
+            "type": "ul",
+            "items": [
+              "El HUD solo muestra avisos: no bloquea controles ni ejecuta acciones.",
+              "Admite teclas largas como <code>BACKSPACE</code> o <code>SHIFT</code>.",
+              "En modo <code>orbit</code>, el aviso sigue al jugador y se mantiene dentro de la pantalla.",
+              "La interfaz sigue siendo legible aunque su fuente web no esté disponible.",
+              "Actualizar ox_lib o qbx_core puede obligar a aplicar otra vez su puente.",
+              "Para desactivar un puente sin quitar su código, pon su opción en <code>false</code> y reinicia el servidor."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "en": {
+    "sections": [
+      {
+        "id": "setup",
+        "title": "Requirements and start order",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "<code>jex_interactions</code> is a standalone interaction prompt HUD. It needs no framework, no <code>ox_lib</code> and no other dependency. The optional ox_lib TextUI and QBX DrawText3D integrations are documented further down."
+          },
+          {
+            "type": "ul",
+            "items": [
+              "A FiveM server.",
+              "The resource folder must be named exactly <code>jex_interactions</code>.",
+              "Any resource that uses its exports must start after <code>jex_interactions</code>."
+            ]
+          },
+          {
+            "type": "p",
+            "html": "The package you download already contains the ready-to-use interface: Node.js, npm and a build step are not required."
+          },
+          {
+            "type": "code",
+            "head": "server.cfg",
+            "code": "ensure jex_interactions\nensure my_resource"
+          },
+          {
+            "type": "note",
+            "html": "Restart the server after installing the resource or changing its configuration."
+          }
+        ]
+      },
+      {
+        "id": "config",
+        "title": "Configuration",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "Every supported setting lives in <code>config.lua</code>."
+          },
+          {
+            "type": "table",
+            "columns": [
+              "Setting",
+              "Default",
+              "What it does"
+            ],
+            "rows": [
+              [
+                "Config.Position",
+                "'orbit'",
+                "HUD position: <code>orbit</code>, <code>top-right</code>, <code>top-left</code>, <code>bottom-right</code>, <code>bottom-left</code> and <code>bottom-center</code>. The legacy value <code>player</code> is accepted as an alias for <code>orbit</code>."
+              ],
+              [
+                "Config.Offset",
+                "{ X = 64, Y = -14 }",
+                "Horizontal and vertical pixel offset used by the <code>orbit</code> position."
+              ],
+              [
+                "Config.Shape",
+                "'round'",
+                "Prompt and key style: <code>round</code> or <code>square</code>."
+              ],
+              [
+                "Config.OuterRing",
+                "true",
+                "Shows the outer frame. Set it to <code>false</code> to display only the key and the text."
+              ],
+              [
+                "Config.MaxVisible",
+                "3",
+                "How many prompts show at the same time. Higher-priority prompts come first."
+              ],
+              [
+                "Config.DefaultKey",
+                "'E'",
+                "Key label used when a prompt does not provide <code>key</code>."
+              ],
+              [
+                "Config.Accent",
+                "'#2f6bff'",
+                "Main colour for normal prompts, in hexadecimal."
+              ],
+              [
+                "Config.Warn",
+                "'#f5b301'",
+                "Colour used by prompts whose state is <code>warn</code>."
+              ],
+              [
+                "Config.Danger",
+                "'#ff3b30'",
+                "Colour used by prompts whose state is <code>bad</code>."
+              ],
+              [
+                "Config.MaxDuration",
+                "30000",
+                "Maximum accepted duration, in milliseconds. <code>0</code> removes the limit."
+              ],
+              [
+                "Config.InterceptTextUI",
+                "true",
+                "Enables the receiver used by the optional ox_lib TextUI integration."
+              ],
+              [
+                "Config.InterceptDrawText3D",
+                "true",
+                "Enables the receiver used by the optional QBX DrawText3D integration."
+              ]
+            ]
+          },
+          {
+            "type": "note",
+            "html": "<code>Config.InterceptTextUI</code> and <code>Config.InterceptDrawText3D</code> do not modify third-party resources on their own: each integration also needs its compatibility block."
+          }
+        ]
+      },
+      {
+        "id": "exports",
+        "title": "Client exports",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "All primary exports are client-side: call them from a client script, never from a server script."
+          },
+          {
+            "type": "h",
+            "text": "show(data)",
+            "mono": true
+          },
+          {
+            "type": "p",
+            "html": "Creates a prompt. If the calling resource already owns a prompt with that <code>id</code>, it is replaced with the new data instead of being duplicated."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "local handle = exports.jex_interactions:show({\n    id       = 'vehicle_storage',\n    key      = 'E',\n    label    = 'Store vehicle',\n    hint     = 'Backspace to cancel',\n    state    = 'ok',\n    priority = 10,\n    duration = 2500,\n})"
+          },
+          {
+            "type": "p",
+            "html": "It returns the prompt's full string handle, or <code>nil</code> when the supplied data is invalid."
+          },
+          {
+            "type": "table",
+            "columns": [
+              "Field",
+              "Type",
+              "Required",
+              "What it is"
+            ],
+            "rows": [
+              [
+                "label",
+                "string · number",
+                "Yes",
+                "Main prompt text. <code>text</code> and <code>title</code> are accepted as aliases."
+              ],
+              [
+                "id",
+                "string · number",
+                "No",
+                "Stable identifier for later updates and removal. If omitted, a unique one is assigned."
+              ],
+              [
+                "key",
+                "string · number",
+                "No",
+                "Key shown by the HUD. Defaults to <code>Config.DefaultKey</code>. It is a label only: it does not register or listen for the control."
+              ],
+              [
+                "hint",
+                "string · number",
+                "No",
+                "Optional secondary text."
+              ],
+              [
+                "state",
+                "string",
+                "No",
+                "Visual state: <code>ok</code>, <code>warn</code> or <code>bad</code>. Invalid or omitted values use <code>ok</code>."
+              ],
+              [
+                "priority",
+                "number",
+                "No",
+                "Display priority: higher values appear first. Defaults to <code>0</code>."
+              ],
+              [
+                "duration",
+                "number",
+                "No",
+                "Lifetime in milliseconds. A positive value removes the prompt automatically. Omit it, or use <code>0</code>, for a persistent prompt."
+              ]
+            ]
+          },
+          {
+            "type": "p",
+            "html": "Input limits are 48 bytes for <code>id</code>, 8 for <code>key</code> and 96 for <code>label</code> and <code>hint</code>. Empty values are not valid where text is required."
+          },
+          {
+            "type": "p",
+            "html": "Keep the returned handle when you create a prompt without an explicit <code>id</code>:"
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "local handle = exports.jex_interactions:show({\n    key      = 'G',\n    label    = 'Trunk opened',\n    duration = 2000,\n})\n\nif handle then\n    -- The same handle can be passed to has, update or hide.\nend"
+          },
+          {
+            "type": "h",
+            "text": "update(ref, patch)",
+            "mono": true
+          },
+          {
+            "type": "p",
+            "html": "Updates selected fields of an existing prompt. It returns <code>true</code> when the prompt was found and updated, otherwise <code>false</code>. It never creates a missing prompt."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "local updated = exports.jex_interactions:update('vehicle_storage', {\n    label    = 'Vehicle cannot be stored here',\n    state    = 'bad',\n    priority = 20,\n})"
+          },
+          {
+            "type": "p",
+            "html": "Fields not included in <code>patch</code> keep their existing values. The aliases <code>text</code> and <code>title</code> also update the main label. Use <code>hint = false</code> to remove the current hint:"
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "exports.jex_interactions:update('vehicle_storage', { hint = false })"
+          },
+          {
+            "type": "p",
+            "html": "If a timed prompt is updated without supplying <code>duration</code>, its existing expiry time is preserved. Set <code>duration = 0</code> to make it persistent, or supply a new positive duration to start a new lifetime."
+          },
+          {
+            "type": "h",
+            "text": "hide(ref)",
+            "mono": true
+          },
+          {
+            "type": "p",
+            "html": "Removes one prompt owned by the calling resource. It returns <code>true</code> if the prompt existed."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "exports.jex_interactions:hide('vehicle_storage')"
+          },
+          {
+            "type": "h",
+            "text": "hideAll()",
+            "mono": true
+          },
+          {
+            "type": "p",
+            "html": "Removes every prompt owned by the calling resource and returns how many were removed. Prompts created by other resources are not affected."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "local removed = exports.jex_interactions:hideAll()"
+          },
+          {
+            "type": "h",
+            "text": "has(ref)",
+            "mono": true
+          },
+          {
+            "type": "p",
+            "html": "Returns whether the referenced prompt is currently registered."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "if exports.jex_interactions:has('vehicle_storage') then\n    exports.jex_interactions:update('vehicle_storage', { state = 'warn' })\nend"
+          },
+          {
+            "type": "h",
+            "text": "active()",
+            "mono": true
+          },
+          {
+            "type": "p",
+            "html": "Returns an array of the currently visible full handles, in display order. It contains at most <code>Config.MaxVisible</code> entries."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "local handles = exports.jex_interactions:active()\n\nfor index, handle in ipairs(handles) do\n    print(index, handle)\nend"
+          },
+          {
+            "type": "h",
+            "text": "Prompt references and ownership"
+          },
+          {
+            "type": "p",
+            "html": "<code>update</code>, <code>hide</code> and <code>has</code> accept either form:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "The short ID assigned by the calling resource, such as <code>vehicle_storage</code>.",
+              "The full handle returned by <code>show</code>, such as <code>my_garage:vehicle_storage</code>."
+            ]
+          },
+          {
+            "type": "p",
+            "html": "Prompt IDs are scoped to the resource that creates them, so different resources may safely use the same short ID. For normal use, a resource should manage only its own prompts and prefer short IDs."
+          },
+          {
+            "type": "note",
+            "html": "When a client resource stops, the prompts it owns are removed automatically. You should still call <code>hide</code> as soon as the interaction is no longer available so the HUD updates immediately."
+          }
+        ]
+      },
+      {
+        "id": "patterns",
+        "title": "Common usage patterns",
+        "blocks": [
+          {
+            "type": "h",
+            "text": "Show a prompt while the player is inside a zone"
+          },
+          {
+            "type": "p",
+            "html": "Call <code>show</code> once on entry and <code>hide</code> once on exit. Do not call <code>show</code> every frame."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "CreateThread(function()\n    local promptVisible = false\n    local location = vector3(-1037.0, -2737.0, 20.2)\n\n    while true do\n        local playerCoords = GetEntityCoords(PlayerPedId())\n        local nearby = #(playerCoords - location) < 2.0\n\n        if nearby and not promptVisible then\n            exports.jex_interactions:show({\n                id    = 'atm',\n                key   = 'E',\n                label = 'Use ATM',\n            })\n            promptVisible = true\n        elseif not nearby and promptVisible then\n            exports.jex_interactions:hide('atm')\n            promptVisible = false\n        end\n\n        Wait(250)\n    end\nend)"
+          },
+          {
+            "type": "p",
+            "html": "Displaying a key does not handle the key press: the interaction logic stays in your own resource."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "if promptVisible and IsControlJustReleased(0, 38) then -- INPUT_CONTEXT / E\n    TriggerEvent('my_resource:openMenu')\nend"
+          },
+          {
+            "type": "h",
+            "text": "Several prioritised actions"
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "exports.jex_interactions:show({\n    id       = 'primary_action',\n    key      = 'E',\n    label    = 'Open',\n    priority = 100,\n})\n\nexports.jex_interactions:show({\n    id       = 'secondary_action',\n    key      = 'G',\n    label    = 'Inspect',\n    priority = 50,\n})"
+          },
+          {
+            "type": "p",
+            "html": "If more prompts exist than <code>Config.MaxVisible</code>, the lower-priority ones wait until space becomes available."
+          },
+          {
+            "type": "h",
+            "text": "Declaring the dependency in your manifest"
+          },
+          {
+            "type": "p",
+            "html": "Not required when the startup order is already guaranteed in <code>server.cfg</code>. If your resource must not start without the HUD, declare it:"
+          },
+          {
+            "type": "code",
+            "head": "fxmanifest.lua",
+            "code": "dependency 'jex_interactions'\n\nclient_script 'client.lua'"
+          }
+        ]
+      },
+      {
+        "id": "events",
+        "title": "Event API",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "Client events are available for integrations that cannot call exports. Use the exports whenever you can: they assign ownership automatically."
+          },
+          {
+            "type": "p",
+            "html": "Events cannot reliably identify their sender, so provide a stable <code>owner</code> value when showing and hiding a prompt."
+          },
+          {
+            "type": "code",
+            "head": "client.lua",
+            "code": "TriggerEvent('jex_interactions:show', {\n    owner    = 'my_resource',\n    id       = 'interaction',\n    key      = 'E',\n    label    = 'Interact',\n    priority = 10,\n})\n\nTriggerEvent('jex_interactions:hide', 'interaction', 'my_resource')"
+          },
+          {
+            "type": "p",
+            "html": "If <code>owner</code> is omitted, the prompt belongs to the shared <code>external</code> owner. Avoid reusing the same <code>id</code> under that shared owner across unrelated resources."
+          },
+          {
+            "type": "note",
+            "html": "The event API exposes show and hide only. Use the client exports when you need updates, existence checks, per-resource cleanup, return values or the active prompt list."
+          }
+        ]
+      },
+      {
+        "id": "oxlib",
+        "title": "Optional ox_lib TextUI integration",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "This integration redirects compatible single-key E interactions from <code>lib.showTextUI</code> to the HUD. Prompts that are not compatible keep using the native ox_lib TextUI."
+          },
+          {
+            "type": "note",
+            "html": "Verified with ox_lib 3.39.0. A different release may organise the file differently, so locate the functions by name instead of by line number. Back up or commit the file first: an ox_lib update may overwrite the change."
+          },
+          {
+            "type": "code",
+            "head": "server.cfg",
+            "code": "ensure ox_lib\nensure jex_interactions\n\n# Resources that call lib.showTextUI start below this line.\nensure my_resource"
+          },
+          {
+            "type": "code",
+            "head": "jex_interactions/config.lua",
+            "code": "Config.InterceptTextUI = true"
+          },
+          {
+            "type": "p",
+            "html": "Open <code>ox_lib/resource/interface/client/textui.lua</code>. Keep its type annotations, and replace the TextUI state plus the <code>lib.showTextUI</code>, <code>lib.hideTextUI</code> and <code>lib.isTextUIOpen</code> implementations with this compatibility block:"
+          },
+          {
+            "type": "code",
+            "head": "ox_lib/resource/interface/client/textui.lua",
+            "code": "local isOpen = false\nlocal currentText\nlocal usingHud = false\nlocal HUD = 'jex_interactions'\n\nlocal function hideNative()\n    if not isOpen then return end\n    SendNUIMessage({ action = 'textUiHide' })\n    isOpen = false\nend\n\nlocal function releaseHud()\n    if GetResourceState(HUD) == 'started' then\n        pcall(function()\n            exports[HUD]:releaseTextUI()\n        end)\n    end\n    usingHud = false\nend\n\n---@param text string\n---@param options? TextUIOptions\nfunction lib.showTextUI(text, options)\n    if currentText == text then return end\n\n    currentText = text\n    usingHud = false\n\n    if GetResourceState(HUD) == 'started' then\n        local ok, taken = pcall(function()\n            return exports[HUD]:consumeTextUI(text)\n        end)\n        if ok and taken then\n            hideNative()\n            usingHud = true\n            return\n        end\n    end\n\n    if not options then options = {} end\n    options.text = text\n\n    SendNUIMessage({\n        action = 'textUi',\n        data = options\n    })\n    isOpen = true\nend\n\nfunction lib.hideTextUI()\n    releaseHud()\n    hideNative()\n    currentText = nil\nend\n\n---@return boolean, string | nil\nfunction lib.isTextUIOpen()\n    return (isOpen or usingHud), currentText\nend\n\nAddEventHandler('onClientResourceStop', function(resource)\n    if resource ~= HUD or not usingHud then return end\n    usingHud = false\n    local text = currentText\n    currentText = nil\n    if text then lib.showTextUI(text) end\nend)"
+          },
+          {
+            "type": "p",
+            "html": "Restart the entire server after editing ox_lib. When interception is disabled, the HUD is unavailable or a prompt is unsupported, ox_lib keeps displaying its original TextUI with its normal options."
+          },
+          {
+            "type": "note",
+            "html": "Resources using ox_lib must continue pairing every <code>lib.showTextUI(...)</code> with <code>lib.hideTextUI()</code> when the interaction ends."
+          }
+        ]
+      },
+      {
+        "id": "qbx",
+        "title": "Optional QBX DrawText3D integration",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "This integration redirects compatible E-key prompts passed to <code>qbx.drawText3d(params)</code> while leaving unsupported text in its original 3D format."
+          },
+          {
+            "type": "note",
+            "html": "Verified with qbx_core 1.23.0. Back up or commit the file first: a qbx_core update may overwrite the change."
+          },
+          {
+            "type": "code",
+            "head": "server.cfg",
+            "code": "ensure qbx_core\nensure jex_interactions\n\n# Resources that use qbx.drawText3d start below this line.\nensure my_resource"
+          },
+          {
+            "type": "code",
+            "head": "jex_interactions/config.lua",
+            "code": "Config.InterceptDrawText3D = true"
+          },
+          {
+            "type": "p",
+            "html": "Open <code>qbx_core/modules/lib.lua</code>, find <code>function qbx.drawText3d(params)</code> and insert this block immediately after the declaration. Keep the original function content below it as the fallback:"
+          },
+          {
+            "type": "code",
+            "head": "qbx_core/modules/lib.lua",
+            "code": "local text = params.text\n\nlocal mayBeInteraction = text and (\n    text:find('[E]', 1, true)\n    or text:find('E~', 1, true)\n    or text:find('~E~', 1, true)\n    or text:find(' E ', 1, true)\n    or text:find('E -', 1, true)\n)\n\nif mayBeInteraction and GetResourceState('jex_interactions') == 'started' then\n    local ok, taken = pcall(function()\n        return exports.jex_interactions:consumeDrawText3D(text)\n    end)\n    if ok and taken then return end\nend"
+          },
+          {
+            "type": "p",
+            "html": "Restart the entire server after editing this module: restarting only qbx_core may leave other resources using the previously loaded one."
+          },
+          {
+            "type": "note",
+            "html": "QBX resources should keep calling <code>qbx.drawText3d</code> while an interaction is available. The HUD prompt is removed shortly after those calls stop."
+          }
+        ]
+      },
+      {
+        "id": "compatibility",
+        "title": "What gets redirected, and how to check it",
+        "blocks": [
+          {
+            "type": "p",
+            "html": "The ox_lib and QBX integrations redirect supported single-action E-key prompts, in formats such as these:"
+          },
+          {
+            "type": "code",
+            "head": "",
+            "code": "[E] Open\nE - Open\nPress [E] to open\nPress E to open\n~g~E~w~ - Open"
+          },
+          {
+            "type": "p",
+            "html": "They intentionally leave the following in the original interface:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Informational text without an E interaction.",
+              "ALT and ox_target prompts.",
+              "Multi-key help text, such as <code>BACKSPACE + E + DEL</code>.",
+              "Any text that cannot be interpreted as one clear E-key action."
+            ]
+          },
+          {
+            "type": "note",
+            "html": "For resources you control, the primary <code>show</code>, <code>update</code> and <code>hide</code> exports are preferred over either compatibility bridge."
+          },
+          {
+            "type": "h",
+            "text": "Verifying a bridge after installing it"
+          },
+          {
+            "type": "ol",
+            "items": [
+              "Enter a zone that shows a supported prompt such as <code>[E] Open</code>. Only the <code>jex_interactions</code> HUD should be visible.",
+              "Leave the zone: the prompt must disappear.",
+              "Test informational text without an E key: it must stay in its original UI.",
+              "Test an ALT or ox_target prompt: it must stay in its original UI.",
+              "Stop <code>jex_interactions</code> while an ox_lib prompt is open: the native TextUI should be restored.",
+              "Set the relevant interception option to <code>false</code>, restart the server and confirm that the original UI is used."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "troubleshooting",
+        "title": "Troubleshooting",
+        "blocks": [
+          {
+            "type": "h",
+            "text": "The export does not exist"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Confirm that the installed folder is named exactly <code>jex_interactions</code>.",
+              "Confirm that <code>ensure jex_interactions</code> appears before the calling resource.",
+              "Confirm that the export is called from a client script.",
+              "Check the FiveM client console for resource startup errors."
+            ]
+          },
+          {
+            "type": "h",
+            "text": "A prompt does not appear"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Ensure <code>label</code> contains non-empty text.",
+              "Ensure the resource is started and the call is made client-side.",
+              "If many prompts are active, increase the prompt's <code>priority</code> or <code>Config.MaxVisible</code>.",
+              "If <code>duration</code> is used, confirm that it is long enough and is not limited by <code>Config.MaxDuration</code>."
+            ]
+          },
+          {
+            "type": "h",
+            "text": "A prompt remains visible"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Call <code>hide</code> with the same ID used by <code>show</code>, from the same resource.",
+              "When using an automatically generated ID, pass the full handle returned by <code>show</code>.",
+              "For ox_lib, ensure every open call is paired with <code>lib.hideTextUI()</code> and that the compatibility block calls <code>releaseTextUI()</code>.",
+              "For QBX, ensure the resource stops calling <code>qbx.drawText3d</code> after the player leaves the interaction area."
+            ]
+          },
+          {
+            "type": "h",
+            "text": "Both the custom HUD and the original UI appear"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "In the QBX bridge, confirm that the function returns when the compatibility export reports that it handled the prompt.",
+              "In the ox_lib bridge, confirm that the native TextUI is hidden when the prompt is accepted.",
+              "Restart the entire server after changing ox_lib or qbx_core."
+            ]
+          },
+          {
+            "type": "h",
+            "text": "A supported QBX prompt remains in 3D"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Confirm <code>Config.InterceptDrawText3D = true</code>.",
+              "Confirm that <code>jex_interactions</code> starts before the resource using the QBX module.",
+              "Confirm that the text uses one of the supported E-key formats.",
+              "Restart the entire server so every consumer reloads the modified QBX module."
+            ]
+          },
+          {
+            "type": "h",
+            "text": "Configuration changes do not appear"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Restart <code>jex_interactions</code>, or the whole server when an optional bridge was also changed.",
+              "Confirm that you edited the <code>config.lua</code> belonging to the running copy of the resource."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "notes",
+        "title": "Operational notes",
+        "blocks": [
+          {
+            "type": "ul",
+            "items": [
+              "The HUD displays prompts only: it does not block controls or execute actions.",
+              "Long key labels such as <code>BACKSPACE</code> and <code>SHIFT</code> are supported.",
+              "In <code>orbit</code> mode, the prompt follows the player and stays within the visible screen area.",
+              "The interface remains usable if its optional web font is unavailable.",
+              "Updating ox_lib or qbx_core may require reapplying the corresponding bridge.",
+              "To disable a bridge without removing its code, set its option to <code>false</code> and restart the server."
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

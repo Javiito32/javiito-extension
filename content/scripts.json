@@ -17,7 +17,7 @@
       "ES",
       "EN"
     ],
-    "tebex": "https://tu-tienda.tebex.io/package/000009",
+    "tebex": "https://mapaches-development.tebex.store/",
     "idle": "0.00 ms",
     "performance": [
       {
@@ -107,6 +107,14 @@
         "Use <span class=\"mono-inline\">update</span> to change a prompt live and <span class=\"mono-inline\">hide</span> or <span class=\"mono-inline\">hideAll</span> to take it down.",
         "Check usage with <span class=\"mono-inline\">resmon 1</span>: with no prompt visible it must read 0.00 ms."
       ]
-    }
+    },
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2026-09-05",
+        "es": "Primera versión pública.",
+        "en": "First public release."
+      }
+    ]
   }
 ]

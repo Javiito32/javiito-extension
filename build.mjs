@@ -8,7 +8,7 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, cpSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { renderHome, renderCatalog, renderProduct, renderNotFound, price, tpl } from './src/templates.mjs';
+import { renderHome, renderCatalog, renderDocs, renderProduct, renderNotFound, price, tpl } from './src/templates.mjs';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const read = (p) => JSON.parse(readFileSync(join(root, p), 'utf8'));
@@ -16,6 +16,12 @@ const read = (p) => JSON.parse(readFileSync(join(root, p), 'utf8'));
 const site = read('content/site.json');
 const scripts = read('content/scripts.json');
 const langs = site.languages.map((code) => read(`content/${code}.json`));
+
+/* Manual largo de cada script: content/manuals/<slug>.json, si existe. */
+for (const s of scripts) {
+  const file = `content/manuals/${s.slug}.json`;
+  if (existsSync(join(root, file))) s.manual = read(file);
+}
 
 const dist = join(root, 'dist');
 rmSync(dist, { recursive: true, force: true });
@@ -39,6 +45,15 @@ for (const s of scripts) {
     else if (!s[lang].tagline) problems.push(`${s.slug}.${lang}: falta "tagline"`);
   }
   if (typeof s.price !== 'number') problems.push(`${s.slug}: "price" debe ser un número`);
+  if (s.manual) {
+    const ids = (lang) => ((s.manual[lang] || {}).sections || []).map((sec) => sec.id).join('|');
+    const reference = ids(site.defaultLang);
+    if (!reference) problems.push(`${s.slug}: el manual no tiene secciones en "${site.defaultLang}"`);
+    for (const lang of site.languages) {
+      if (!ids(lang)) problems.push(`${s.slug}: el manual no tiene secciones en "${lang}"`);
+      else if (ids(lang) !== reference) problems.push(`${s.slug}: las secciones del manual no coinciden entre "${site.defaultLang}" y "${lang}"`);
+    }
+  }
 }
 if (problems.length) {
   console.error('Contenido con problemas:\n  - ' + problems.join('\n  - '));
@@ -68,6 +83,7 @@ for (const t of langs) {
   const url = {
     home: base,
     catalog: `${base}scripts/`,
+    docs: `${base}docs/`,
     product: (slug) => `${base}scripts/${slug}/`,
     homeDefault: `/${site.defaultLang}/`,
     self: base,
@@ -109,6 +125,13 @@ for (const t of langs) {
     url: { ...url, self: url.catalog },
     altUrl: `/${other}/scripts/`,
     canonical: ctx.absolute(url.catalog),
+  }))));
+
+  // documentación (toda en el sitio: no hay wiki externa)
+  summary.push(write(`${lang}/docs/index.html`, renderDocs(page({
+    url: { ...url, self: url.docs },
+    altUrl: `/${other}/docs/`,
+    canonical: ctx.absolute(url.docs),
   }))));
 
   // fichas de producto
@@ -206,7 +229,7 @@ summary.push(write('assets/favicon.svg', favicon));
 // robots + sitemap
 const urls = [];
 for (const lang of site.languages) {
-  urls.push(`/${lang}/`, `/${lang}/scripts/`, ...scripts.map((s) => `/${lang}/scripts/${s.slug}/`));
+  urls.push(`/${lang}/`, `/${lang}/scripts/`, `/${lang}/docs/`, ...scripts.map((s) => `/${lang}/scripts/${s.slug}/`));
 }
 summary.push(write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

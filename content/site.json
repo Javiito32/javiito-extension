@@ -13,16 +13,13 @@
     "en"
   ],
   "links": {
-    "discord": "https://discord.gg/TU-INVITACION",
-    "tebexStore": "https://tu-tienda.tebex.io",
-    "tebexOrders": "https://checkout.tebex.io/payment-history",
-    "tebexBundle": "https://tu-tienda.tebex.io/package/000000",
-    "docs": "https://docs.tudominio.com",
-    "changelog": "https://docs.tudominio.com/changelog"
+    "discord": "https://discord.com/invite/Hj6kSMQcTR",
+    "tebexStore": "https://mapaches-development.tebex.store/",
+    "tebexBundle": "https://mapaches-development.tebex.store/"
   },
   "bundle": {
     "price": 149,
-    "tebex": "https://tu-tienda.tebex.io/package/000000"
+    "tebex": "https://mapaches-development.tebex.store/"
   },
   "stats": {
     "activeServers": "[N]",
